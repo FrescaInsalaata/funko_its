@@ -3,20 +3,22 @@ using UnityEngine.AI;
 
 public class PunkBehaviour : MonoBehaviour
 {
+    [Header("General Stats")]
+    public float moveSpeed = 3f;
+    public float detectionRange = 15f;
+    public float attackCooldown = 1.5f;
+
+    public float meleeRange = 2f;
+
+    //Punk has either a knife or a pistol
     public enum WeaponType { Knife, Pistol }
     public WeaponType weaponType;
 
-    [Header("References")]
-    public Transform gunMuzzle;        // Where bullets spawn
-    public GameObject bulletPrefab;    // Bullet prefab
+    [Header("Ranged Behaviour")]
+    public float minShootRange = 5f;
+    public Transform gunMuzzle;
+    public GameObject bulletPrefab;
     public float bulletSpeed = 20f;
-
-    [Header("Stats")]
-    public float moveSpeed = 3f;
-    public float detectionRange = 15f;
-    public float meleeRange = 2f;
-    public float shootRange = 10f;
-    public float attackCooldown = 1.5f;
 
     private float lastAttackTime;
     private Transform targetPlayer;
@@ -31,7 +33,6 @@ public class PunkBehaviour : MonoBehaviour
     void Update()
     {
         FindClosestPlayer();
-
         if (targetPlayer != null)
         {
             float distance = Vector3.Distance(transform.position, targetPlayer.position);

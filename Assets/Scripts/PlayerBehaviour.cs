@@ -9,7 +9,6 @@ public class PlayerBehaviour : MonoBehaviour
     private Rigidbody rb;
     public float moveSpeed = 5f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         move = InputSystem.actions.FindAction("Move");
@@ -25,14 +24,12 @@ public class PlayerBehaviour : MonoBehaviour
             currentWeapon.Fire(firePoint);
         }
     }
-
     void FixedUpdate()
     {
         Vector2 movement = move.ReadValue<Vector2>();
         Vector3 direction = new Vector3(movement.x, 0, movement.y);
         rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
     }
-    
     public void EquipWeapon(Weapon newWeapon)
     {
         currentWeapon = newWeapon;

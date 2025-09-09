@@ -3,20 +3,25 @@ using UnityEngine.AI;
 
 public class FacebreakerBehaviour : MonoBehaviour
 {
-    [Header("Stats")]
-    public float health = 300f;
-    public float moveSpeed = 2f;           // Slow enemy
+    [Header("General Stats")]
+    public float moveSpeed = 2f;
     public float detectionRange = 20f;
-    public float meleeRange = 3f;          // Melee attack range
-    public float rushRange = 8f;           // Medium range to trigger dash
     public float attackCooldown = 2f;
-    public float rushSpeedMultiplier = 3f; // Dash speed multiplier
-    public float rushDuration = 1f;        // Dash lasts 1 second
+
+    public float meleeRange = 3f;
+
+    //Facebreaker has heavy melee attacks
+    public float heavyAttackMultiplier = 2f;
 
     private float lastAttackTime;
     private Transform targetPlayer;
     private NavMeshAgent agent;
 
+    //Facebreaker Specific Behaviour
+    [Header("Rush Behaviour")]
+    public float rushRange = 8f;
+    public float rushSpeedMultiplier = 3f;
+    public float rushDuration = 1f;
     private bool isRushing = false;
     private float rushEndTime;
 
@@ -29,7 +34,6 @@ public class FacebreakerBehaviour : MonoBehaviour
     void Update()
     {
         FindClosestPlayer();
-
         if (targetPlayer != null)
         {
             float distance = Vector3.Distance(transform.position, targetPlayer.position);
@@ -96,7 +100,6 @@ public class FacebreakerBehaviour : MonoBehaviour
         if (Time.time - lastAttackTime >= attackCooldown)
         {
             lastAttackTime = Time.time;
-            Debug.Log($"{name} hits {targetPlayer.name} with a heavy punch!");
             // TODO: Apply heavy damage to player
         }
     }
@@ -109,22 +112,6 @@ public class FacebreakerBehaviour : MonoBehaviour
             rushEndTime = Time.time + rushDuration;
             agent.speed = moveSpeed * rushSpeedMultiplier;
             agent.isStopped = false;
-            Debug.Log($"{name} starts rushing towards {targetPlayer.name}!");
         }
-    }
-
-    public void TakeDamage(float amount)
-    {
-        health -= amount;
-        if (health <= 0f)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        EnemySpawnerManager.Instance.ReduceFacebreakerCounter(); // Or specific Facebreaker counter
-        Destroy(gameObject);
     }
 }

@@ -5,10 +5,9 @@ public class GameManager : MonoBehaviour
 {
     //GameManager handles area transitions and settings
     public static GameManager Instance;
-    [Header("Area Settings")]
-    public int currentArea = 0;
+    private int currentArea = 0;
+    private float currentEnemiesToKill;
     public Area[] areas;
-    public float currentEnemiesToKill;
 
     void Awake()
     {

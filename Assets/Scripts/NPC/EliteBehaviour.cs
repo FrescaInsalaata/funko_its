@@ -3,27 +3,29 @@ using UnityEngine.AI;
 
 public class EliteBehaviour : MonoBehaviour
 {
+    [Header("General Stats")]
+    public float moveSpeed = 3f;
+    public float detectionRange = 20f;
+    public float attackCooldown = 1f;
+
+    //Elite has either a sawed-off shotgun and a submachine gun
     public enum WeaponType { SMG, SawedOff }
     public WeaponType weaponType;
 
-    [Header("References")]
+    [Header("Ranged Behaviour")]
+    public float minShootRange = 5f;
+    public float maxShootRange = 15f;
     public Transform gunMuzzle;
     public GameObject bulletPrefab;
     public float bulletSpeed = 20f;
-
-    [Header("Stats")]
-    public float moveSpeed = 3f;
-    public float detectionRange = 20f;    // Detection radius
-    public float minShootRange = 5f;      // Preferred shooting distance
-    public float maxShootRange = 15f;     // Max shooting distance
-    public float attackCooldown = 1f;
-    public float retreatDistance = 5f;    // How far to move away when retreating
-
+    
     private float lastAttackTime;
     private Transform targetPlayer;
     private NavMeshAgent agent;
 
+    //Elite Specific Behaviour
     private bool isRetreating = false;
+    public float retreatDistance = 5f;
 
     void Start()
     {
@@ -34,7 +36,6 @@ public class EliteBehaviour : MonoBehaviour
     void Update()
     {
         FindClosestPlayer();
-
         if (targetPlayer != null)
         {
             float distance = Vector3.Distance(transform.position, targetPlayer.position);
