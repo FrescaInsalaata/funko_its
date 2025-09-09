@@ -152,7 +152,6 @@ public class PunkBehaviour : MonoBehaviour
 
     void Die()
     {
-        EnemySpawnerManager.Instance.ReducePunkCounter();
         Destroy(gameObject);
     }
 }

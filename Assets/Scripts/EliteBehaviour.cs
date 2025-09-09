@@ -149,7 +149,6 @@ public class EliteBehaviour : MonoBehaviour
 
     void Die()
     {
-        EnemySpawnerManager.Instance.ReduceEliteCounter();
         Destroy(gameObject);
     }
 }

@@ -3,27 +3,30 @@ using UnityEngine;
 
 public class EnemySpawnerManager : MonoBehaviour
 {
+    //This EnemySpawnerManager spawns enemies based on the current area
+    //It also limits the number of enemies in the scene
+    //It uses empty GameObjects as spawn points
+
     public static EnemySpawnerManager Instance;
 
     [Header("Enemy Prefabs")]
     public GameObject[] enemyPrefabs;
     // WARNING! Place empty GameObjects in the scene as spawn points
+    [Header("Area0 Spawn Points")]
+    public Transform[] area0SpawnPoints;
     [Header("Area1 Spawn Points")]
     public Transform[] area1SpawnPoints;
     [Header("Area2 Spawn Points")]
     public Transform[] area2SpawnPoints;
     [Header("Area3 Spawn Points")]
     public Transform[] area3SpawnPoints;
-    [Header("Area4 Spawn Points")]
-    public Transform[] area4SpawnPoints;
+
     [Header("Spawn Settings")]
     public float spawnInterval = 3f;  // Time between spawns
-    private float timer = 0f;
-    private float currentPunks;
-    private float currentElites;
-    private float currentFacebreakers;
-    private const float MAX_ENEMIES = 30f;
-    private const float MAX_FACEBREAKERS = 2f;
+    private float enemiesToSpawn = 0; // Enemies left to spawn in the current area
+    private float timer = 0f; // Timer to track spawn intervals
+    private float currentFacebreakers = 0; // Current number of Facebreakers in the scene
+    private const float MAX_FACEBREAKERS = 2f; // Max number of Facebreakers allowed in the scene
 
     void Awake()
     {
@@ -40,43 +43,38 @@ public class EnemySpawnerManager : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-
         if (timer >= spawnInterval)
         {
             SpawnEnemy();
             timer = 0f;
         }
+        if (enemiesToSpawn <= 0)
+        {
+            StartCoroutine(GameManager.Instance.CompletedArea());
+        }
     }
 
     void SpawnEnemy()
     {
-        if (currentEnemies() >= MAX_ENEMIES)
+        if (enemiesToSpawn <= 0)
             return;
-        // Gets current area from GameManager
-        float currentArea = GameManager.Instance.GetCurrentArea();
-        // Pick a random enemy
-        GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-        switch (enemyToSpawn)
-        {
-            case var _ when enemyToSpawn.name.Contains("Punk"):
-                IncreasePunkCounter();
-                break;
-            case var _ when enemyToSpawn.name.Contains("Elite"):
-                IncreaseEliteCounter();
-                break;
-            case var _ when enemyToSpawn.name.Contains("Facebreaker"):
-                if (currentFacebreakers >= MAX_FACEBREAKERS)
-                    return;
-                IncreaseFacebreakerCounter();
-                break;
-            default:
-                break;
-        }
+        enemiesToSpawn--;
 
-        // Pick a random spawn point
+        float currentArea = GameManager.Instance.GetCurrentArea(); // Gets current area from GameManager
+        GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]; // Pick a random enemy
+
+        if (currentFacebreakers < MAX_FACEBREAKERS)
+        {
+            currentFacebreakers++;
+        } else return;
+
+        //Spawn in current area
         Transform spawnPoint = null;
         switch (currentArea)
         {
+            case 0:
+                spawnPoint = area0SpawnPoints[Random.Range(0, area0SpawnPoints.Length)];
+                break;
             case 1:
                 spawnPoint = area1SpawnPoints[Random.Range(0, area1SpawnPoints.Length)];
                 break;
@@ -86,46 +84,20 @@ public class EnemySpawnerManager : MonoBehaviour
             case 3:
                 spawnPoint = area3SpawnPoints[Random.Range(0, area3SpawnPoints.Length)];
                 break;
-            case 4:
-                spawnPoint = area4SpawnPoints[Random.Range(0, area4SpawnPoints.Length)];
-                break;
             default:
                 break;
         }
-        //Spawn it
-        Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
-    }
+        Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation); //Spawn it
 
-    public void ReducePunkCounter()
-    {
-        if (currentPunks > 0)
-            currentPunks--;
     }
-    private void IncreasePunkCounter()
+    public void SetEnemiesToSpawn(float enemies)
     {
-        currentPunks++;
-    }
-    public void ReduceEliteCounter()
-    {
-        if (currentElites > 0)
-            currentElites--;
-    }
-    private void IncreaseEliteCounter()
-    {
-        currentElites++;
+        enemiesToSpawn = enemies;
     }
     public void ReduceFacebreakerCounter()
     {
         if (currentFacebreakers > 0)
             currentFacebreakers--;
-    }
-    private void IncreaseFacebreakerCounter()
-    {
-        currentFacebreakers++;
-    }
-    private float currentEnemies()
-    {
-        return currentPunks + currentElites + currentFacebreakers;
     }
 }
 
