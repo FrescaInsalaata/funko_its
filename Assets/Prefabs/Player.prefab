@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1948975508205945914}
   - component: {fileID: 7676345443940088123}
   - component: {fileID: 2190921363447316711}
+  - component: {fileID: -2414162819240025410}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -134,17 +135,9 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  jump:
-    m_Name: Jump
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 521bdb1a-1036-4359-ac95-e0e99bd19647
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
+  currentWeapon: {fileID: 0}
+  firePoint: {fileID: 0}
   moveSpeed: 5
-  jumpForce: 5
 --- !u!54 &7676345443940088123
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -250,3 +243,16 @@ MonoBehaviour:
   m_DefaultActionMap: GameControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &-2414162819240025410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582080433088116343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe937c7b1646aed47a446cf705dd36df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  current: 100

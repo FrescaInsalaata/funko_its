@@ -12,7 +12,6 @@ public class PunkBehaviour : MonoBehaviour
     public float bulletSpeed = 20f;
 
     [Header("Stats")]
-    public float health = 100f;
     public float moveSpeed = 3f;
     public float detectionRange = 15f;
     public float meleeRange = 2f;
@@ -139,19 +138,5 @@ public class PunkBehaviour : MonoBehaviour
             return hit.transform == player;
         }
         return false;
-    }
-
-    public void TakeDamage(float amount)
-    {
-        health -= amount;
-        if (health <= 0f)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        Destroy(gameObject);
     }
 }

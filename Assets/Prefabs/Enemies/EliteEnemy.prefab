@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2331095189689776487}
   - component: {fileID: 690083533479033377}
   - component: {fileID: -1478006642450668126}
+  - component: {fileID: 7612556917412441139}
   m_Layer: 0
   m_Name: EliteEnemy
   m_TagString: Untagged
@@ -123,3 +124,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8344f04b76c67d4488c9a2b4912c750d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponType: 0
+  gunMuzzle: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  bulletSpeed: 20
+  health: 81.5
+  moveSpeed: 3
+  detectionRange: 20
+  minShootRange: 5
+  maxShootRange: 15
+  attackCooldown: 1
+  retreatDistance: 5
+--- !u!114 &7612556917412441139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961886817706789019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe937c7b1646aed47a446cf705dd36df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  current: 100

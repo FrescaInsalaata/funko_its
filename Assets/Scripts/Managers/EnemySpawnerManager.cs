@@ -53,7 +53,6 @@ public class EnemySpawnerManager : MonoBehaviour
             StartCoroutine(GameManager.Instance.CompletedArea());
         }
     }
-
     void SpawnEnemy()
     {
         if (enemiesToSpawn <= 0)
