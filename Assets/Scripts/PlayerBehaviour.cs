@@ -15,38 +15,52 @@ public class PlayerBehaviour : MonoBehaviour
     private Transform currentMuzzle;
     private GameObject weaponInstance;
 
+    private PlayerInput playerInput;
     private InputAction moveAction;
-    private InputAction fireAction;
+    private InputAction attackAction;
 
+    private void Start()
+    {
+        if (currentWeapon != null)
+            EquipWeapon(currentWeapon);
+        else
+            Debug.LogWarning("No starting weapon assigned to player!");
+    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        if (moveAction == null)
-            moveAction = InputSystem.actions.FindAction("Move");
-        if (fireAction == null)
-            fireAction = InputSystem.actions.FindAction("Fire1");
+        playerInput = GetComponent<PlayerInput>();
+        moveAction = playerInput.actions["Move"];
+        attackAction = playerInput.actions["Attack"];
     }
 
     private void OnEnable()
     {
         moveAction.Enable();
-        fireAction.Enable();
-        fireAction.performed += OnFire;
+        attackAction.Enable();
+        attackAction.performed += OnFire;
     }
 
     private void OnDisable()
     {
         moveAction.Disable();
-        fireAction.Disable();
-        fireAction.performed -= OnFire;
+        attackAction.Disable();
+        attackAction.performed -= OnFire;
     }
-
     private void OnFire(InputAction.CallbackContext ctx)
     {
-        if (currentWeapon != null)
-            currentWeapon.Fire();
-    }
+        Debug.Log("Attack button pressed!");
 
+        if (currentWeapon != null && currentMuzzle != null)
+        {
+            Debug.Log($"Firing {currentWeapon.weaponName} from {currentMuzzle.name}");
+            currentWeapon.Fire(currentMuzzle);
+        }
+        else
+        {
+            Debug.LogWarning("Tried to attack, but no weapon or muzzle assigned!");
+        }
+    }
     private void Update()
     {
         moveInput = moveAction.ReadValue<Vector2>();
@@ -76,6 +90,11 @@ public class PlayerBehaviour : MonoBehaviour
         // Instantiate new weapon
         weaponInstance = Instantiate(currentWeapon.weaponPrefab, handMount.position, handMount.rotation, handMount);
         currentMuzzle = weaponInstance.transform.Find("Muzzle");
+
+        weaponInstance = Instantiate(currentWeapon.weaponPrefab, handMount);
+        weaponInstance.transform.localPosition = Vector3.zero;
+        weaponInstance.transform.localRotation = Quaternion.identity;
+        weaponInstance.transform.localScale = Vector3.one;
 
         if (currentMuzzle == null)
             Debug.LogWarning("Weapon prefab missing Muzzle transform!");

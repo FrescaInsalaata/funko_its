@@ -129,25 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   currentWeapon: {fileID: 11400000, guid: 7066bd94c1afdcf448efa858b896e748, type: 2}
-  handMount: {fileID: 0}
-  moveAction:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 8bd846d2-2339-4846-8075-0596b8580a11
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  fireAction:
-    m_Name: Fire
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 06dd9e20-1db1-431a-bb7f-448275aca2aa
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
+  handMount: {fileID: 3812955081664971271, guid: 4e644f157c75c53478a19d0395bae468, type: 3}
 --- !u!54 &7676345443940088123
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -95,7 +95,7 @@ public class AttackAI : MonoBehaviour
                 if (!IsInAttackCooldown())
                 {
                     lastAttackTime = Time.time;
-                    weapon.Fire();
+                    //Implement ranged attack
                     if (enemyType == EnemyType.Elite)
                        HandleEliteRetreat();
                 }

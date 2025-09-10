@@ -21,17 +21,18 @@ public class WeaponData : ScriptableObject
     public Transform muzzle;
 
     // Abstract method if you want different weapons to implement shooting
-    public virtual void Fire()
+    public virtual void Fire(Transform firePoint)
     {
-        if (!projectilePrefab || muzzle) return;
+        if (projectilePrefab == null || firePoint == null) return;
 
-        GameObject bullet = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
+        GameObject bullet = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.isKinematic = false;
+            rb.isKinematic = false;
             rb.linearVelocity = Vector3.zero;
-            rb.AddForce(muzzle.forward * projectileSpeed, ForceMode.VelocityChange);
+            rb.AddForce(firePoint.forward * projectileSpeed, ForceMode.VelocityChange);
         }
     }
 }
