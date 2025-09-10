@@ -15,7 +15,7 @@ public class PunkBehaviour : MonoBehaviour
     public WeaponType weaponType;
 
     [Header("Ranged Behaviour")]
-    public float minShootRange = 5f;
+    public float shootRange = 5f;
     public Transform gunMuzzle;
     public GameObject bulletPrefab;
     public float bulletSpeed = 20f;
