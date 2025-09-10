@@ -49,7 +49,7 @@ public class AttackAI : MonoBehaviour
             }
             sqrDistance = Mathf.Infinity; // avoid any movement logic
             return;
-        }
+        } //Idle
         
         if ((enemyCore.targetPlayer.position - transform.position).sqrMagnitude > disengageRange * disengageRange)
         {
@@ -57,17 +57,17 @@ public class AttackAI : MonoBehaviour
             enemyCore.agent.isStopped = true;
             enemyCore.agent.ResetPath();
             return;
-        }
+        } //Disengage
 
         sqrDistance = (enemyCore.targetPlayer.position - transform.position).sqrMagnitude;
 
         switch (weapon.weaponType)
         {
             case WeaponType.Melee:
-                HandleMeleeAttack(sqrDistance);
+                HandleMeleeAttack(sqrDistance); // Handle melee attack logic
                 break;
             case WeaponType.Ranged:
-                HandleRangedAttack(sqrDistance);
+                HandleRangedAttack(sqrDistance); //
                 break;
         }
     }

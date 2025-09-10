@@ -13,26 +13,25 @@ public class WeaponData : ScriptableObject
     public WeaponType weaponType;
     public BulletType bulletType;
 
-    [Header("Raycast")]
-    public float raycastDistance;
 
-    [Header("Projectile")]
-    public GameObject bulletPrefab;
-    public float bulletSpeed;
+    [Header("Gun")]
+    public GameObject projectilePrefab;
+    public GameObject weaponPrefab;
+    public float projectileSpeed;
     public Transform muzzle;
 
     // Abstract method if you want different weapons to implement shooting
     public virtual void Fire()
     {
-        if (!bulletPrefab || muzzle) return;
+        if (!projectilePrefab || muzzle) return;
 
-        GameObject bullet = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
+        GameObject bullet = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.isKinematic = false;
             rb.linearVelocity = Vector3.zero;
-            rb.AddForce(muzzle.forward * bulletSpeed, ForceMode.VelocityChange);
+            rb.AddForce(muzzle.forward * projectileSpeed, ForceMode.VelocityChange);
         }
     }
 }

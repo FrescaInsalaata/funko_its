@@ -18,7 +18,7 @@ MonoBehaviour:
   range: 15
   weaponType: 0
   bulletType: 1
-  raycastDistance: 0
-  bulletPrefab: {fileID: 0}
+  projectilePrefab: {fileID: 5629096558020621899, guid: c8f91e6251b04c047afbaba8f0380511, type: 3}
+  weaponPrefab: {fileID: 1083010936394630200, guid: 61d82154da0abe1429a03e3575ad0f7e, type: 3}
   bulletSpeed: 20
   muzzle: {fileID: 0}

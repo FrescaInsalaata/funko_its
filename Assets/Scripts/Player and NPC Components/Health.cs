@@ -17,7 +17,7 @@ public class Health : MonoBehaviour
         if (current > 100f) current = 100f;
     }
    public void Die()
-    {
-        Destroy(gameObject);
-    }
+   {
+       Destroy(gameObject);
+   }
 }
