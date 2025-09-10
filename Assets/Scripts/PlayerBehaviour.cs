@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerBehaviour : MonoBehaviour
 {
     public InputAction move;
-    public Weapon currentWeapon;
+    public WeaponData currentWeapon;
     public Transform firePoint;
     private Rigidbody rb;
     public float moveSpeed = 5f;
@@ -21,7 +21,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (Input.GetButton("Fire1") && currentWeapon != null)
         {
-            currentWeapon.Fire(firePoint);
+            currentWeapon.Fire();
         }
     }
     void FixedUpdate()
@@ -30,7 +30,7 @@ public class PlayerBehaviour : MonoBehaviour
         Vector3 direction = new Vector3(movement.x, 0, movement.y);
         rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
     }
-    public void EquipWeapon(Weapon newWeapon)
+    public void EquipWeapon(WeaponData newWeapon)
     {
         currentWeapon = newWeapon;
         Debug.Log("Equipped " + newWeapon.weaponName);

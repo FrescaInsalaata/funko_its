@@ -3,15 +3,16 @@ using UnityEngine;
 
 public class EnemySpawnerManager : MonoBehaviour
 {
-    //This EnemySpawnerManager spawns enemies based on the current area
-    //It also limits the number of enemies in the scene
-    //It uses empty GameObjects as spawn points
+    // EnemySpawnerManager
+    // Spawns enemies based on the current area
+    // Limits the number of enemies in the scene
+    // Uses empty GameObjects as spawn points
 
     public static EnemySpawnerManager Instance;
 
     [Header("Enemy Prefabs")]
     public GameObject[] enemyPrefabs;
-    // WARNING! Place empty GameObjects in the scene as spawn points
+    // TODO: Place empty GameObjects in the scene as spawn points
     [Header("Area0 Spawn Points")]
     public Transform[] area0SpawnPoints;
     [Header("Area1 Spawn Points")]
@@ -23,10 +24,11 @@ public class EnemySpawnerManager : MonoBehaviour
 
     [Header("Spawn Settings")]
     public float spawnInterval = 3f;  // Time between spawns
-    private float enemiesToSpawn = 0; // Enemies left to spawn in the current area
+    public const float MAX_FACEBREAKERS = 2f; // Max number of Facebreakers allowed in the scene
+
     private float timer = 0f; // Timer to track spawn intervals
+    private float enemiesToSpawn = 0; // Enemies left to spawn in the current area
     private float currentFacebreakers = 0; // Current number of Facebreakers in the scene
-    private const float MAX_FACEBREAKERS = 2f; // Max number of Facebreakers allowed in the scene
 
     void Awake()
     {
@@ -67,8 +69,7 @@ public class EnemySpawnerManager : MonoBehaviour
             currentFacebreakers++;
         } else return;
 
-        //Spawn in current area
-        Transform spawnPoint = null;
+        Transform spawnPoint = null; // Gets Current Area Spawn Points
         switch (currentArea)
         {
             case 0:
@@ -86,14 +87,13 @@ public class EnemySpawnerManager : MonoBehaviour
             default:
                 break;
         }
-        Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation); //Spawn it
-
+        Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation); // Spawns the enemy at the spawn point
     }
-    public void SetEnemiesToSpawn(float enemies)
+    public void SetEnemiesToSpawn(float enemies) // Called by GameManager when area starts
     {
         enemiesToSpawn = enemies;
     }
-    public void ReduceFacebreakerCounter()
+    public void ReduceFacebreakerCounter() // Called by Facebreaker on death
     {
         if (currentFacebreakers > 0)
             currentFacebreakers--;
