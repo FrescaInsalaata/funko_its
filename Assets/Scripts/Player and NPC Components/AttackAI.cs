@@ -5,19 +5,19 @@ public enum EnemyType { Punk, Elite, Facebreaker }
 public class AttackAI : MonoBehaviour
 {
     public WeaponData weapon;
-    public EnemyCore enemyCore;
     public EnemyType enemyType;
     private float lastAttackTime;
+    private EnemyCore enemyCore;
 
-    // Elite Specific
+    [Header("Elite Specific (EDIT ONLY IF ELITE)")]
+    public float retreatDistance = 5f;
     private bool isRetreating = false;
-    private float retreatDistance = 5f;
 
-    // Facebreaker Specific
+    [Header("Facebreaker Specific (EDIT ONLY IF FACEBREAKER)")]
     public float walkRange = 5f;
     public float chargeRange = 8f;
-    public float chargeSpeedMultiplier = 3f;
-    public float chargeDuration = 1f;
+    public float chargeSpeedMultiplier = 2f;
+    public float chargeDuration = 1.3f;
     private bool isCharging = false;
     private float chargeEndTime;
 

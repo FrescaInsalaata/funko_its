@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
         current -= amount;
         if (current <= 0f)
         {
-            die();
+            Die();
         }
     }
     public void Heal(float amount)
@@ -16,8 +16,7 @@ public class Health : MonoBehaviour
         current += amount;
         if (current > 100f) current = 100f;
     }
-
-    public void die()
+   public void Die()
     {
         Destroy(gameObject);
     }
