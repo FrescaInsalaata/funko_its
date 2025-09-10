@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 252b76bd895a27240ae710c3112215b3, type: 3}
-  m_Name: OlReliable
+  m_Name: Knuckledusters
   m_EditorClassIdentifier: 
-  weaponName: Ol' Reliable
+  weaponName: Knuckledusters
   damage: 20
-  fireRate: 1
-  range: 15
+  fireRate: 3
+  range: 2
   weaponType: 0
-  bulletType: 1
+  bulletType: 2
   raycastDistance: 0
   bulletPrefab: {fileID: 0}
-  bulletSpeed: 20
+  bulletSpeed: 0
   muzzle: {fileID: 0}

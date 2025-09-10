@@ -6,6 +6,7 @@ public class AttackAI : MonoBehaviour
 {
     public WeaponData weapon;
     public EnemyType enemyType;
+    public float disengageRange = 20f;
     private float lastAttackTime;
     private EnemyCore enemyCore;
 
@@ -25,6 +26,7 @@ public class AttackAI : MonoBehaviour
     private float sqrMeleeRange;
     private float sqrWalkRange;
     private float sqrChargeRange;
+    private float sqrDistance;
 
     void Start()
     {
@@ -38,14 +40,26 @@ public class AttackAI : MonoBehaviour
 
     void Update()
     {
-        if (enemyCore.targetPlayer == null)
+        if (enemyCore.targetPlayer == null || !enemyCore.isFighting)
         {
+            if (enemyCore.agent.isOnNavMesh)
+            {
+                enemyCore.agent.isStopped = true;
+                enemyCore.agent.ResetPath(); // stop movement completely
+            }
+            sqrDistance = Mathf.Infinity; // avoid any movement logic
+            return;
+        }
+        
+        if ((enemyCore.targetPlayer.position - transform.position).sqrMagnitude > disengageRange * disengageRange)
+        {
+            enemyCore.isFighting = false;
             enemyCore.agent.isStopped = true;
+            enemyCore.agent.ResetPath();
             return;
         }
 
-        // Compute squared distance once
-        float sqrDistance = (enemyCore.targetPlayer.position - transform.position).sqrMagnitude;
+        sqrDistance = (enemyCore.targetPlayer.position - transform.position).sqrMagnitude;
 
         switch (weapon.weaponType)
         {
@@ -70,24 +84,28 @@ public class AttackAI : MonoBehaviour
 
     void HandleRangedAttack(float sqrDistance)
     {
+
         if (sqrDistance <= sqrMeleeRange && CanSeeTarget(enemyCore.targetPlayer))
         {
             enemyCore.agent.isStopped = true;
+            enemyCore.agent.speed = enemyCore.moveSpeed;
 
             if (Time.time - lastAttackTime >= weapon.fireRate)
             {
-                lastAttackTime = Time.time;
-                weapon.Fire();
+                if (!IsInAttackCooldown())
+                {
+                    lastAttackTime = Time.time;
+                    weapon.Fire();
+                    if (enemyType == EnemyType.Elite)
+                       HandleEliteRetreat();
+                }
 
-                if (enemyType == EnemyType.Elite)
-                    HandleEliteRetreat();
+                return; // skip movement logic while attacking
             }
         }
         else
         {
-            enemyCore.agent.isStopped = false;
-            enemyCore.agent.speed = enemyCore.moveSpeed;
-            enemyCore.agent.SetDestination(enemyCore.targetPlayer.position);
+            MoveTowardTarget();
         }
     }
 
@@ -104,11 +122,14 @@ public class AttackAI : MonoBehaviour
             enemyCore.agent.isStopped = true;
             enemyCore.agent.speed = enemyCore.moveSpeed;
 
-            if (Time.time - lastAttackTime >= weapon.fireRate)
+            if (!IsInAttackCooldown())
             {
                 lastAttackTime = Time.time;
                 // TODO: Melee attack implementation
             }
+
+            // Keep the agent stopped during the cooldown
+            return;
         }
         else if (enemyType == EnemyType.Facebreaker &&
                  sqrDistance > sqrWalkRange &&
@@ -119,9 +140,7 @@ public class AttackAI : MonoBehaviour
         }
         else // Walk towards player
         {
-            enemyCore.agent.isStopped = false;
-            enemyCore.agent.speed = enemyCore.moveSpeed;
-            enemyCore.agent.SetDestination(enemyCore.targetPlayer.position);
+            MoveTowardTarget();
         }
     }
 
@@ -129,9 +148,7 @@ public class AttackAI : MonoBehaviour
     {
         isCharging = true;
         chargeEndTime = Time.time + chargeDuration;
-        enemyCore.agent.isStopped = false;
-        enemyCore.agent.speed = enemyCore.moveSpeed * chargeSpeedMultiplier;
-        enemyCore.agent.SetDestination(enemyCore.targetPlayer.position);
+        MoveTowardTarget();
     }
 
     void ContinueCharge()
@@ -162,4 +179,16 @@ public class AttackAI : MonoBehaviour
                 isRetreating = false;
         }
     }
+
+    void MoveTowardTarget()
+    {
+        enemyCore.agent.isStopped = false;
+        enemyCore.agent.speed = enemyCore.moveSpeed;
+        enemyCore.agent.SetDestination(enemyCore.targetPlayer.position);
+    }
+    bool IsInAttackCooldown()
+    {
+        return Time.time - lastAttackTime < weapon.fireRate;
+    }
 }
+

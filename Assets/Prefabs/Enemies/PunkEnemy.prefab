@@ -163,7 +163,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   detectionRange: 15
-  targetPlayer: {fileID: 0}
+  isFighting: 0
+  targetPlayer: {fileID: 8633394375317970480, guid: 74c0e11fa146d1a40b675915aed87898, type: 3}
   agent: {fileID: 0}
 --- !u!114 &802644419408472368
 MonoBehaviour:
@@ -177,4 +178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01a4f0506b03e44cac63149dfc2b3c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 0}
+  weapon: {fileID: 11400000, guid: 6c12215a4608aa54d9f3a787bb44551f, type: 2}
+  enemyType: 0
+  retreatDistance: 5
+  walkRange: 5
+  chargeRange: 8
+  chargeSpeedMultiplier: 2
+  chargeDuration: 1.3

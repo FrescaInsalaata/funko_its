@@ -8,7 +8,7 @@ public class EnemyCore : MonoBehaviour
     public float moveSpeed = 3f;
     public float detectionRange = 15f;
     private float timerChase = 0f;
-
+    [HideInInspector] public bool isFighting = false;
     [HideInInspector] public Transform targetPlayer;
     [HideInInspector] public NavMeshAgent agent;
 
@@ -45,6 +45,12 @@ public class EnemyCore : MonoBehaviour
         }
 
         if (minDistance > detectionRange)
-            targetPlayer = null;
+        {
+            isFighting = false;
+        }
+        else
+        {
+            isFighting = true;
+        }
     }
 }
