@@ -18,6 +18,7 @@ public class PlayerBehaviour : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction moveAction;
     private InputAction attackAction;
+    private InputAction interactAction;
 
     private InputAction lookAction;
     private Vector2 lookInput;
@@ -42,6 +43,7 @@ public class PlayerBehaviour : MonoBehaviour
         moveAction = playerInput.actions["Move"];
         lookAction = playerInput.actions["Look"];
         attackAction = playerInput.actions["Attack"];
+        interactAction = playerInput.actions["Interact"];
     }
 
     private void OnEnable()
@@ -49,7 +51,9 @@ public class PlayerBehaviour : MonoBehaviour
         moveAction.Enable();
         attackAction.Enable();
         lookAction.Enable();
+        interactAction.Enable();
         attackAction.performed += OnFire;
+        interactAction.performed += OnInteract;
     }
 
     private void OnDisable()
@@ -57,7 +61,15 @@ public class PlayerBehaviour : MonoBehaviour
         moveAction.Disable();
         attackAction.Disable();
         lookAction.Disable();
+        interactAction.Disable();
         attackAction.performed -= OnFire;
+        interactAction.performed -= OnInteract;
+    }
+
+    private void OnInteract(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Interact button pressed!");
+        // Implement interaction logic here
     }
     private void OnFire(InputAction.CallbackContext ctx)
     {
