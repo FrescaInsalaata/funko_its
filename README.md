@@ -6,3 +6,6 @@ Unity Editor Version: 6000.0.52f1
 
 GDD -
 https://docs.google.com/document/d/1jQNzPqTIy4gXcs2j1AxAPGE16osqC0sSNZD8WpZme90/edit?usp=sharing
+
+NOTIOS -
+https://www.notion.so/Funko-todo-list-26a2dbfd492c806baa65f87869cd473e
