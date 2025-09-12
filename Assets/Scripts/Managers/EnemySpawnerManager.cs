@@ -1,5 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class EnemySpawnerManager : MonoBehaviour
 {
@@ -14,13 +16,13 @@ public class EnemySpawnerManager : MonoBehaviour
     public GameObject[] enemyPrefabs;
     // TODO: Place empty GameObjects in the scene as spawn points
     [Header("Area0 Spawn Points")]
-    public Transform[] area0SpawnPoints;
+    public GameObject[] area0SpawnPoints;
     [Header("Area1 Spawn Points")]
-    public Transform[] area1SpawnPoints;
+    public GameObject[] area1SpawnPoints;
     [Header("Area2 Spawn Points")]
-    public Transform[] area2SpawnPoints;
+    public GameObject[] area2SpawnPoints;
     [Header("Area3 Spawn Points")]
-    public Transform[] area3SpawnPoints;
+    public GameObject[] area3SpawnPoints;
 
     [Header("Spawn Settings")]
     public float spawnInterval = 3f;  // Time between spawns
@@ -73,16 +75,16 @@ public class EnemySpawnerManager : MonoBehaviour
         switch (currentArea)
         {
             case 0:
-                spawnPoint = area0SpawnPoints[Random.Range(0, area0SpawnPoints.Length)];
+                spawnPoint = area0SpawnPoints[Random.Range(0, area0SpawnPoints.Length)].transform;
                 break;
             case 1:
-                spawnPoint = area1SpawnPoints[Random.Range(0, area1SpawnPoints.Length)];
+                spawnPoint = area1SpawnPoints[Random.Range(0, area1SpawnPoints.Length)].transform;
                 break;
             case 2:
-                spawnPoint = area2SpawnPoints[Random.Range(0, area2SpawnPoints.Length)];
+                spawnPoint = area2SpawnPoints[Random.Range(0, area2SpawnPoints.Length)].transform;
                 break;
             case 3:
-                spawnPoint = area3SpawnPoints[Random.Range(0, area3SpawnPoints.Length)];
+                spawnPoint = area3SpawnPoints[Random.Range(0, area3SpawnPoints.Length)].transform;
                 break;
             default:
                 break;
