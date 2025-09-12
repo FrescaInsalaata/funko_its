@@ -234,6 +234,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b348f366-d16f-44d1-8b4d-9aa0f060a0f3
     m_ActionName: 'MenuControls/Select[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 993608c4-6ee8-4f83-b768-73c63a4d14b9
+    m_ActionName: GameControls/Look
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GameControls
@@ -280,8 +284,8 @@ Transform:
   m_GameObject: {fileID: 8900909598549027725}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.148, y: 0.27399993, z: 0.67}
-  m_LocalScale: {x: 1.3423625, y: 0.068056, z: 0.12045}
+  m_LocalPosition: {x: 0.535, y: 0.27399993, z: 0.015}
+  m_LocalScale: {x: 0.32669076, y: 0.068056, z: 0.12045}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8633394375317970480}

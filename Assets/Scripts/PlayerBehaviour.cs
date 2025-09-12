@@ -133,13 +133,11 @@ public class PlayerBehaviour : MonoBehaviour
         if (weaponInstance != null)
             Destroy(weaponInstance);
 
-        // Instantiate new weapon
-        weaponInstance = Instantiate(currentWeapon.weaponPrefab, handMount.position, handMount.rotation, handMount);
-        currentMuzzle = weaponInstance.transform.Find("Muzzle");
 
+        // Instantiate new weapon
         weaponInstance = Instantiate(currentWeapon.weaponPrefab, handMount);
-        weaponInstance.transform.localPosition = Vector3.zero;
-        weaponInstance.transform.localRotation = Quaternion.identity;
+        currentMuzzle = weaponInstance.transform.Find("Muzzle");
+        weaponInstance.transform.SetParent(handMount, worldPositionStays: true);
         weaponInstance.transform.localScale = Vector3.one;
 
         if (currentMuzzle == null)
