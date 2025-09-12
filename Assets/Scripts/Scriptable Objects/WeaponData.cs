@@ -30,7 +30,6 @@ public class WeaponData : ScriptableObject
         if (rb != null)
         {
             rb.isKinematic = false;
-            rb.isKinematic = false;
             rb.linearVelocity = Vector3.zero;
             rb.AddForce(firePoint.forward * projectileSpeed, ForceMode.VelocityChange);
         }

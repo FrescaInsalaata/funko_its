@@ -37,7 +37,6 @@ public class PlayerBehaviour : MonoBehaviour
     }
     private void Awake()
     {
-
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
@@ -132,7 +131,6 @@ public class PlayerBehaviour : MonoBehaviour
         // Destroy old weapon
         if (weaponInstance != null)
             Destroy(weaponInstance);
-
 
         // Instantiate new weapon
         weaponInstance = Instantiate(currentWeapon.weaponPrefab, handMount);
