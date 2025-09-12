@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5290968891718707076}
   m_Layer: 0
   m_Name: FacebreakerEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 6c12215a4608aa54d9f3a787bb44551f, type: 2}
   enemyType: 2
+  disengageRange: 20
   retreatDistance: 5
   walkRange: 5
   chargeRange: 8
@@ -182,5 +183,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   detectionRange: 15
+  isFighting: 0
   targetPlayer: {fileID: 8633394375317970480, guid: 74c0e11fa146d1a40b675915aed87898, type: 3}
   agent: {fileID: 0}

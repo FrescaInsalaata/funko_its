@@ -34,4 +34,10 @@ public class WeaponData : ScriptableObject
             rb.AddForce(firePoint.forward * projectileSpeed, ForceMode.VelocityChange);
         }
     }
+
+    public virtual void MeleeAttack(Transform attackPoint, GameObject Player)
+    {
+        Debug.Log("Melee attack executed at " + attackPoint.position);
+        Player.GetComponent<Health>().TakeDamage(damage);
+    }
 }

@@ -49,7 +49,7 @@ public class AttackAI : MonoBehaviour
             }
             sqrDistance = Mathf.Infinity; // avoid any movement logic
             return;
-        } //Idle
+        } //If player is too far, I idle
         
         if ((enemyCore.targetPlayer.position - transform.position).sqrMagnitude > disengageRange * disengageRange)
         {
@@ -57,17 +57,20 @@ public class AttackAI : MonoBehaviour
             enemyCore.agent.isStopped = true;
             enemyCore.agent.ResetPath();
             return;
-        } //Disengage
+        } //When I chase player, if player is too far, I disengage
+
 
         sqrDistance = (enemyCore.targetPlayer.position - transform.position).sqrMagnitude;
-
+        //Otherwise... I chase and attack!
         switch (weapon.weaponType)
         {
             case WeaponType.Melee:
-                HandleMeleeAttack(sqrDistance); // Handle melee attack logic
+                Debug.Log("I'm starting an attack at melee!");
+                HandleMeleeAttack(sqrDistance); 
                 break;
             case WeaponType.Ranged:
-                HandleRangedAttack(sqrDistance); //
+                Debug.Log("I'm starting an attack from range!");
+                HandleRangedAttack(sqrDistance);
                 break;
         }
     }
@@ -84,7 +87,6 @@ public class AttackAI : MonoBehaviour
 
     void HandleRangedAttack(float sqrDistance)
     {
-
         if (sqrDistance <= sqrMeleeRange && CanSeeTarget(enemyCore.targetPlayer))
         {
             enemyCore.agent.isStopped = true;
@@ -111,14 +113,18 @@ public class AttackAI : MonoBehaviour
 
     void HandleMeleeAttack(float sqrDistance)
     {
+        //If I'm charging, I continue charging!
         if (isCharging)
         {
+            Debug.Log("Continuing charge...");
             ContinueCharge();
             return;
         }
 
-        if (sqrDistance <= sqrMeleeRange) // Player in melee range
+        //If player is in range, I attack!
+        if (sqrDistance <= sqrMeleeRange)
         {
+            Debug.Log("In melee range, attacking...");
             enemyCore.agent.isStopped = true;
             enemyCore.agent.speed = enemyCore.moveSpeed;
 
@@ -126,11 +132,13 @@ public class AttackAI : MonoBehaviour
             {
                 lastAttackTime = Time.time;
                 // TODO: Melee attack implementation
+                weapon.MeleeAttack(transform, enemyCore.targetPlayer.gameObject);
             }
 
             // Keep the agent stopped during the cooldown
             return;
         }
+        //If player is out of range, and I'm facebreaker, I decide whether to walk or charge!
         else if (enemyType == EnemyType.Facebreaker &&
                  sqrDistance > sqrWalkRange &&
                  sqrDistance <= sqrChargeRange &&
@@ -138,7 +146,8 @@ public class AttackAI : MonoBehaviour
         {
             StartCharge();
         }
-        else // Walk towards player
+        //If player is out of range, I chase him!
+        else
         {
             MoveTowardTarget();
         }

@@ -13,6 +13,15 @@ public class BulletBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+    }
+    //on collision with another object
+    private void OnCollisionEnter(Collision collision)
+    {
+        //destroy the bullet
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<Health>().TakeDamage(20);
+            Destroy(gameObject);
+        }
     }
 }
