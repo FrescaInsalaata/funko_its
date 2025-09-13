@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     }
     void InitializeAreas()
     {
+        Debug.Log("Initializing Areas");
         for (int i = 0; i < areas.Length; i++)
         {
             areas[i].BuildArea();
@@ -34,15 +35,20 @@ public class GameManager : MonoBehaviour
         areas[0].ActivateArea(); // Activate first area
         EnemySpawnerManager.Instance.SetEnemiesToSpawn(areas[0].numEnemies);
     }
-    
+
     public IEnumerator CompletedArea()
     {
-        if (currentArea < areas.Length)
+        if (currentArea + 1 < areas.Length) // check BEFORE increment
         {
             currentArea++;
-            areas[currentArea].ActivateArea(); // Activate next area
+            areas[currentArea].ActivateArea();
             yield return new WaitForSeconds(4);
             EnemySpawnerManager.Instance.SetEnemiesToSpawn(areas[currentArea].numEnemies);
+        }
+        else
+        {
+            Debug.Log("All areas completed!");
+            Destroy(EnemySpawnerManager.Instance.gameObject);
         }
     }
     public int GetCurrentArea()

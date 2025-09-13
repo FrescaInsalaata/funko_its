@@ -46,7 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 1961886817706789019, guid: 2cccb1dbb1ed72e4894ea5f96fe3ed11, type: 3}
-  area0SpawnPointsList:
+  area0SpawnPoints:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  area1SpawnPoints: []
+  area2SpawnPoints: []
+  area3SpawnPoints: []
   spawnInterval: 3

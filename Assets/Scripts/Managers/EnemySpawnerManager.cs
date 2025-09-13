@@ -61,35 +61,64 @@ public class EnemySpawnerManager : MonoBehaviour
     {
         if (enemiesToSpawn <= 0)
             return;
+
         enemiesToSpawn--;
+        Debug.Log($"Enemies left to spawn: {enemiesToSpawn}");
 
-        float currentArea = GameManager.Instance.GetCurrentArea(); // Gets current area from GameManager
-        GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]; // Pick a random enemy
+        int currentArea = GameManager.Instance.GetCurrentArea();
+        GameObject enemyToSpawn = null;
 
-        if (currentFacebreakers < MAX_FACEBREAKERS)
+        // Pick enemy until we find one valid to spawn
+        for (int i = 0; i < 5; i++) // try a few times max
         {
-            currentFacebreakers++;
-        } else return;
+            GameObject candidate = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
 
-        Transform spawnPoint = null; // Gets Current Area Spawn Points
+            if (candidate.name.ToLower().Contains("facebreaker"))
+            {
+                if (currentFacebreakers >= MAX_FACEBREAKERS)
+                    continue; // try another prefab
+                else
+                {
+                    currentFacebreakers++;
+                    enemyToSpawn = candidate;
+                    break;
+                }
+            }
+            else
+            {
+                enemyToSpawn = candidate;
+                break;
+            }
+        }
+
+        if (enemyToSpawn == null)
+        {
+            Debug.LogWarning("Could not find a valid enemy to spawn this round.");
+            return;
+        }
+
+        Transform spawnPoint = null;
         switch (currentArea)
         {
             case 0:
+                Debug.Log("Spawning in Area 0");
                 spawnPoint = area0SpawnPoints[Random.Range(0, area0SpawnPoints.Length)].transform;
                 break;
             case 1:
+                Debug.Log("Spawning in Area 1");
                 spawnPoint = area1SpawnPoints[Random.Range(0, area1SpawnPoints.Length)].transform;
                 break;
             case 2:
+                Debug.Log("Spawning in Area 2");
                 spawnPoint = area2SpawnPoints[Random.Range(0, area2SpawnPoints.Length)].transform;
                 break;
             case 3:
+                Debug.Log("Spawning in Area 3");
                 spawnPoint = area3SpawnPoints[Random.Range(0, area3SpawnPoints.Length)].transform;
                 break;
-            default:
-                break;
         }
-        Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation); // Spawns the enemy at the spawn point
+
+        Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
     }
     public void SetEnemiesToSpawn(float enemies) // Called by GameManager when area starts
     {

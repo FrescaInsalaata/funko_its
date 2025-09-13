@@ -11,30 +11,46 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Weapon")]
     public WeaponData currentWeapon;
-    public Transform handMount;
-    private Transform currentMuzzle;
+    public GameObject handMount;
     private GameObject weaponInstance;
+    public GameObject firePoint;
+
+    [Header("Item")]
+    public ItemData currentItem;
+    public GameObject throwMount;
+
+    [Header("Camera")]
+    public Camera mainCamera;
+    public LayerMask groundMask;
 
     private PlayerInput playerInput;
     private InputAction moveAction;
     private InputAction attackAction;
     private InputAction interactAction;
+    private InputAction useItemAction;
+    private InputAction reloadAction;
 
     private InputAction lookAction;
     private Vector2 lookInput;
+    Vector3 lookDir;
+    private Vector3 lastLookDirection;
 
-
-    [Header("Camera")]
-    public Camera mainCamera;
-    public LayerMask groundMask; // layer del terreno o piano su cui vuoi proiettare il mouse
-
+    private PickupBehaviour nearbyPickup;
 
     private void Start()
     {
         if (currentWeapon != null)
             EquipWeapon(currentWeapon);
-        else
-            Debug.LogWarning("No starting weapon assigned to player!");
+    }
+    private void Update()
+    {
+        moveInput = moveAction.ReadValue<Vector2>();
+        lookInput = lookAction.ReadValue<Vector2>();
+    }
+    private void FixedUpdate()
+    {
+        Movement();
+        Look();
     }
     private void Awake()
     {
@@ -44,6 +60,8 @@ public class PlayerBehaviour : MonoBehaviour
         lookAction = playerInput.actions["Look"];
         attackAction = playerInput.actions["Attack"];
         interactAction = playerInput.actions["Interact"];
+        useItemAction = playerInput.actions["UseItem"];
+        reloadAction = playerInput.actions["Reload"];
     }
 
     private void OnEnable()
@@ -52,8 +70,12 @@ public class PlayerBehaviour : MonoBehaviour
         attackAction.Enable();
         lookAction.Enable();
         interactAction.Enable();
+        useItemAction.Enable();
+        reloadAction.Enable();
         attackAction.performed += OnFire;
         interactAction.performed += OnInteract;
+        useItemAction.performed += OnUseItem;
+        reloadAction.performed += OnReload;
     }
 
     private void OnDisable()
@@ -62,97 +84,139 @@ public class PlayerBehaviour : MonoBehaviour
         attackAction.Disable();
         lookAction.Disable();
         interactAction.Disable();
+        useItemAction.Disable();
+        reloadAction.Disable();
         attackAction.performed -= OnFire;
         interactAction.performed -= OnInteract;
+        useItemAction.performed -= OnUseItem;
+        reloadAction.performed -= OnReload;
     }
 
-    private void OnInteract(InputAction.CallbackContext ctx)
+    private void Movement()
     {
-        Debug.Log("Interact button pressed!");
-        // Implement interaction logic here
-    }
-    private void OnFire(InputAction.CallbackContext ctx)
-    {
-        Debug.Log("Attack button pressed!");
-
-        if (currentWeapon != null && currentMuzzle != null)
-        {
-            Debug.Log($"Firing {currentWeapon.weaponName} from {currentMuzzle.name}");
-            currentWeapon.Fire(currentMuzzle);
-        }
-        else
-        {
-            Debug.LogWarning("Tried to attack, but no weapon or muzzle assigned!");
-        }
-    }
-    private void Update()
-    {
-        moveInput = moveAction.ReadValue<Vector2>();
-        lookInput = lookAction.ReadValue<Vector2>();
-    }
-
-    private Vector3 lastLookDirection;
-
-    private void FixedUpdate()
-    {
-        // Movimento con stick sinistro
         Vector3 direction = new Vector3(moveInput.x, 0f, moveInput.y);
         if (direction.magnitude > 1f) direction.Normalize();
         rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
+    }
+    private void Look()
+    {
+        lookDir = Vector3.zero;
 
-        // ---- Rotazione ----
-        Vector3 lookDir = Vector3.zero;
-
-        // 1. Stick destro (priorità)
-        if (lookInput.sqrMagnitude > 0.01f)
+        // Mouse first (if valid raycast)
+        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, groundMask))
+        {
+            Vector3 lookPos = hit.point;
+            lookPos.y = transform.position.y;
+            lookDir = (lookPos - transform.position).normalized;
+        }
+        // Otherwise fallback to stick
+        else if (lookInput.sqrMagnitude > 0.01f)
         {
             lookDir = new Vector3(lookInput.x, 0f, lookInput.y).normalized;
-            lastLookDirection = lookDir; // aggiorniamo l'ultima direzione joystick valida
-        }
-        else if (lastLookDirection.sqrMagnitude > 0.01f)
-        {
-            // Se lo stick non è mosso, mantieni l'ultima direzione del joystick
-            lookDir = lastLookDirection;
-        }
-        else
-        {
-            // 2. Mouse come fallback solo se lo stick non ha mai avuto input
-            Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f, groundMask))
-            {
-                Vector3 lookPos = hit.point;
-                lookPos.y = transform.position.y;
-                lookDir = (lookPos - transform.position).normalized;
-            }
         }
 
-        // Applica la rotazione
         if (lookDir.sqrMagnitude > 0.01f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(lookDir, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.2f);
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        var pickup = other.GetComponent<PickupBehaviour>();
+        if (pickup != null)
+            nearbyPickup = pickup;
+        if (pickup.itemName.ToLower() == "healthpickup")
+        {
+            Debug.Log("using health pickup...");
+            Health playerHealth = GetComponent<Health>();
+            if (playerHealth != null)
+            {
+                playerHealth.Heal(50);
+                Destroy(pickup.gameObject);
+            }
+        }
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        var pickup = other.GetComponent<PickupBehaviour>();
+        if (pickup != null && pickup == nearbyPickup)
+            nearbyPickup = null;
+    }
 
+    private void OnInteract(InputAction.CallbackContext ctx)
+    {
+        if (nearbyPickup == null) return;
+
+        if (nearbyPickup.weaponData != null)
+        {
+            Debug.Log("Picking up weapon: " + nearbyPickup.weaponData.weaponName);
+            EquipWeapon(nearbyPickup.weaponData);
+            Destroy(nearbyPickup.gameObject);
+        }
+        else if (nearbyPickup.itemData != null)
+        {
+            Debug.Log("Picking up item: " + nearbyPickup.itemData.itemName);
+            EquipItem(nearbyPickup.itemData);
+            Destroy(nearbyPickup.gameObject);
+        }
+    }
+    private void OnUseItem(InputAction.CallbackContext ctx)
+    {
+        if (currentItem != null && currentItem.uses >= 0 && throwMount != null)
+        {
+            currentItem.UseItem(throwMount.transform);
+        }
+        else
+        {
+            Debug.LogWarning("Tried to use item, but no item or throw mount assigned!");
+        }
+    }
+    private void OnFire(InputAction.CallbackContext ctx)
+    {
+        if (currentWeapon != null)
+        {
+            currentWeapon.Fire(firePoint);
+        }
+        else
+        {
+            Debug.LogWarning("Tried to attack, but no weapon assigned!");
+        }
+    }
+    private void OnReload(InputAction.CallbackContext ctx)
+    {
+        if (currentWeapon != null)
+        {
+            currentWeapon.Reload(this);
+        }
+        else
+        {
+            Debug.LogWarning("Tried to reload, but no weapon assigned!");
+        }
+    }
 
     public void EquipWeapon(WeaponData newWeapon)
     {
         currentWeapon = newWeapon;
 
-        // Destroy old weapon
         if (weaponInstance != null)
             Destroy(weaponInstance);
 
-        // Instantiate new weapon
-        weaponInstance = Instantiate(currentWeapon.weaponPrefab, handMount);
-        currentMuzzle = weaponInstance.transform.Find("Muzzle");
-        weaponInstance.transform.SetParent(handMount, worldPositionStays: true);
+        weaponInstance = Instantiate(currentWeapon.weaponPrefab, handMount.transform);
         weaponInstance.transform.localScale = Vector3.one;
+        currentWeapon.SetMaxAmmo();
 
-        if (currentMuzzle == null)
-            Debug.LogWarning("Weapon prefab missing Muzzle transform!");
+        // Find firepoint in the new weapon
+        firePoint = weaponInstance.transform.Find("FirePoint")?.gameObject;
 
         Debug.Log("Equipped " + newWeapon.weaponName);
+    }
+
+    public void EquipItem(ItemData newItem)
+    {
+        currentItem = newItem;
+        Debug.Log("Equipped item: " + newItem.itemName);
     }
 }

@@ -65,11 +65,11 @@ public class AttackAI : MonoBehaviour
         switch (weapon.weaponType)
         {
             case WeaponType.Melee:
-                Debug.Log("I'm starting an attack at melee!");
+                //Debug.Log("I'm starting an attack at melee!");
                 HandleMeleeAttack(sqrDistance); 
                 break;
             case WeaponType.Ranged:
-                Debug.Log("I'm starting an attack from range!");
+                //Debug.Log("I'm starting an attack from range!");
                 HandleRangedAttack(sqrDistance);
                 break;
         }
@@ -116,7 +116,7 @@ public class AttackAI : MonoBehaviour
         //If I'm charging, I continue charging!
         if (isCharging)
         {
-            Debug.Log("Continuing charge...");
+            //Debug.Log("Continuing charge...");
             ContinueCharge();
             return;
         }
@@ -124,7 +124,7 @@ public class AttackAI : MonoBehaviour
         //If player is in range, I attack!
         if (sqrDistance <= sqrMeleeRange)
         {
-            Debug.Log("In melee range, attacking...");
+            //Debug.Log("In melee range, attacking...");
             enemyCore.agent.isStopped = true;
             enemyCore.agent.speed = enemyCore.moveSpeed;
 

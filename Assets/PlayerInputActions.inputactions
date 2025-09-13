@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LaunchThrowable",
+                    "name": "UseItem",
                     "type": "Button",
                     "id": "c758aab3-a060-4f9b-af85-d6645885a631",
                     "expectedControlType": "",
@@ -267,7 +267,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LaunchThrowable",
+                    "action": "UseItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -278,7 +278,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LaunchThrowable",
+                    "action": "UseItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
