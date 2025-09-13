@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: XM10
   m_EditorClassIdentifier: 
   weaponName: XenoMurder 10
-  fireRate: 6
-  bulletPrefab: {fileID: 0}
-  bulletSpeed: 25
   damage: 12
+  fireRate: 6
   range: 15
+  maxAmmo: 0
+  weaponType: 1
+  bulletType: 1
+  projectilePrefab: {fileID: 0}
+  weaponPrefab: {fileID: 0}
+  projectileSpeed: 0

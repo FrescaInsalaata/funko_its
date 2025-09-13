@@ -1,5 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class EnemySpawnerManager : MonoBehaviour
 {
@@ -14,13 +16,13 @@ public class EnemySpawnerManager : MonoBehaviour
     public GameObject[] enemyPrefabs;
     // TODO: Place empty GameObjects in the scene as spawn points
     [Header("Area0 Spawn Points")]
-    public Transform[] area0SpawnPoints;
+    public GameObject[] area0SpawnPoints;
     [Header("Area1 Spawn Points")]
-    public Transform[] area1SpawnPoints;
+    public GameObject[] area1SpawnPoints;
     [Header("Area2 Spawn Points")]
-    public Transform[] area2SpawnPoints;
+    public GameObject[] area2SpawnPoints;
     [Header("Area3 Spawn Points")]
-    public Transform[] area3SpawnPoints;
+    public GameObject[] area3SpawnPoints;
 
     [Header("Spawn Settings")]
     public float spawnInterval = 3f;  // Time between spawns
@@ -59,35 +61,64 @@ public class EnemySpawnerManager : MonoBehaviour
     {
         if (enemiesToSpawn <= 0)
             return;
+
         enemiesToSpawn--;
+        Debug.Log($"Enemies left to spawn: {enemiesToSpawn}");
 
-        float currentArea = GameManager.Instance.GetCurrentArea(); // Gets current area from GameManager
-        GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)]; // Pick a random enemy
+        int currentArea = GameManager.Instance.GetCurrentArea();
+        GameObject enemyToSpawn = null;
 
-        if (currentFacebreakers < MAX_FACEBREAKERS)
+        // Pick enemy until we find one valid to spawn
+        for (int i = 0; i < 5; i++) // try a few times max
         {
-            currentFacebreakers++;
-        } else return;
+            GameObject candidate = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
 
-        Transform spawnPoint = null; // Gets Current Area Spawn Points
+            if (candidate.name.ToLower().Contains("facebreaker"))
+            {
+                if (currentFacebreakers >= MAX_FACEBREAKERS)
+                    continue; // try another prefab
+                else
+                {
+                    currentFacebreakers++;
+                    enemyToSpawn = candidate;
+                    break;
+                }
+            }
+            else
+            {
+                enemyToSpawn = candidate;
+                break;
+            }
+        }
+
+        if (enemyToSpawn == null)
+        {
+            Debug.LogWarning("Could not find a valid enemy to spawn this round.");
+            return;
+        }
+
+        Transform spawnPoint = null;
         switch (currentArea)
         {
             case 0:
-                spawnPoint = area0SpawnPoints[Random.Range(0, area0SpawnPoints.Length)];
+                Debug.Log("Spawning in Area 0");
+                spawnPoint = area0SpawnPoints[Random.Range(0, area0SpawnPoints.Length)].transform;
                 break;
             case 1:
-                spawnPoint = area1SpawnPoints[Random.Range(0, area1SpawnPoints.Length)];
+                Debug.Log("Spawning in Area 1");
+                spawnPoint = area1SpawnPoints[Random.Range(0, area1SpawnPoints.Length)].transform;
                 break;
             case 2:
-                spawnPoint = area2SpawnPoints[Random.Range(0, area2SpawnPoints.Length)];
+                Debug.Log("Spawning in Area 2");
+                spawnPoint = area2SpawnPoints[Random.Range(0, area2SpawnPoints.Length)].transform;
                 break;
             case 3:
-                spawnPoint = area3SpawnPoints[Random.Range(0, area3SpawnPoints.Length)];
-                break;
-            default:
+                Debug.Log("Spawning in Area 3");
+                spawnPoint = area3SpawnPoints[Random.Range(0, area3SpawnPoints.Length)].transform;
                 break;
         }
-        Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation); // Spawns the enemy at the spawn point
+
+        Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
     }
     public void SetEnemiesToSpawn(float enemies) // Called by GameManager when area starts
     {

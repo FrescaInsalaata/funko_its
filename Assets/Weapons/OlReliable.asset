@@ -16,9 +16,10 @@ MonoBehaviour:
   damage: 20
   fireRate: 10
   range: 15
+  maxAmmo: 10
+  reloadTime: 4
   weaponType: 1
   bulletType: 1
   projectilePrefab: {fileID: 5629096558020621899, guid: c8f91e6251b04c047afbaba8f0380511, type: 3}
   weaponPrefab: {fileID: 1083010936394630200, guid: 1148da932dd7d1c4e80c2ad72f4a0920, type: 3}
-  projectileSpeed: 20
-  muzzle: {fileID: 1212326227677921625, guid: 763eb80848c509340a80288f79166592, type: 3}
+  projectileSpeed: 50

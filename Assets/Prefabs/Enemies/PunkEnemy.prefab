@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 802644419408472368}
   m_Layer: 0
   m_Name: PunkEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,6 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 6c12215a4608aa54d9f3a787bb44551f, type: 2}
   enemyType: 0
+  disengageRange: 20
   retreatDistance: 5
   walkRange: 5
   chargeRange: 8
