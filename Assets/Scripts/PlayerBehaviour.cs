@@ -40,6 +40,10 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 lastLookDirection;
     private PickupBehaviour nearbyPickup;
 
+
+    public int playerID;
+
+
     private void Start()
     {
         if (currentWeapon != null)
@@ -107,7 +111,6 @@ public class PlayerBehaviour : MonoBehaviour
         if (direction.magnitude > 1f) direction.Normalize();
 
         float speed = isRunning ? baseMoveSpeed * moveSpeedMultiplier : baseMoveSpeed;
-        Debug.Log("Current Move Speed: " + speed);
         rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
     }
     private void Look()
@@ -190,7 +193,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (currentWeapon != null)
         {
-            currentWeapon.Fire(firePoint);
+            currentWeapon.Fire(firePoint, playerID);
         }
         else
         {
@@ -201,7 +204,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (currentWeapon != null)
         {
-            currentWeapon.Reload(this);
+            currentWeapon.Reload(this, playerID);
         }
         else
         {
@@ -210,7 +213,6 @@ public class PlayerBehaviour : MonoBehaviour
     }
     private void OnRun(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Run pressed");
         isRunning = !isRunning;
     }
     public void EquipWeapon(WeaponData newWeapon)
@@ -222,17 +224,17 @@ public class PlayerBehaviour : MonoBehaviour
 
         weaponInstance = Instantiate(currentWeapon.weaponPrefab, handMount.transform);
         weaponInstance.transform.localScale = Vector3.one;
-        currentWeapon.SetMaxAmmo();
 
-        // Find firepoint in the new weapon
+        // **Setta l’arma con ammo massima e aggiorna la UI**
+        currentWeapon.SetMaxAmmo(playerID);
+
+        // Trova il firePoint nella nuova arma
         firePoint = weaponInstance.transform.Find("FirePoint")?.gameObject;
-
-        Debug.Log("Equipped " + newWeapon.weaponName);
     }
+
 
     public void EquipItem(ItemData newItem)
     {
         currentItem = newItem;
-        Debug.Log("Equipped item: " + newItem.itemName);
     }
 }
