@@ -128,7 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2f5d13197ea144698e62259fcd7185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  baseMoveSpeed: 5
+  moveSpeedMultiplier: 2
   currentWeapon: {fileID: 11400000, guid: 7066bd94c1afdcf448efa858b896e748, type: 2}
   handMount: {fileID: 8900909598549027725}
   firePoint: {fileID: 6388206203977857000, guid: c6d7b1e4dd76e054a9caff227117fb87, type: 3}
@@ -137,7 +138,7 @@ MonoBehaviour:
   mainCamera: {fileID: 746728997721104944, guid: c806934c76b191a4fb3a042cb6212e63, type: 3}
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!54 &7676345443940088123
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -164,7 +165,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &2190921363447316711
 MonoBehaviour:
   m_ObjectHideFlags: 0

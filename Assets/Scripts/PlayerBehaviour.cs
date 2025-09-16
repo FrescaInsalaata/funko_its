@@ -5,9 +5,10 @@ using UnityEngine.InputSystem;
 public class PlayerBehaviour : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed = 5f;
-    private Rigidbody rb;
-    private Vector2 moveInput;
+    public float baseMoveSpeed = 5f;
+    public float moveSpeedMultiplier = 2f;
+    private float moveSpeed;
+    private bool isRunning;
 
     [Header("Weapon")]
     public WeaponData currentWeapon;
@@ -29,12 +30,14 @@ public class PlayerBehaviour : MonoBehaviour
     private InputAction interactAction;
     private InputAction useItemAction;
     private InputAction reloadAction;
+    private InputAction runAction;
 
+    private Rigidbody rb;
+    private Vector2 moveInput;
     private InputAction lookAction;
     private Vector2 lookInput;
     Vector3 lookDir;
     private Vector3 lastLookDirection;
-
     private PickupBehaviour nearbyPickup;
 
     private void Start()
@@ -62,6 +65,9 @@ public class PlayerBehaviour : MonoBehaviour
         interactAction = playerInput.actions["Interact"];
         useItemAction = playerInput.actions["UseItem"];
         reloadAction = playerInput.actions["Reload"];
+        runAction = playerInput.actions["Run"];
+
+        moveSpeed = baseMoveSpeed;
     }
 
     private void OnEnable()
@@ -72,10 +78,12 @@ public class PlayerBehaviour : MonoBehaviour
         interactAction.Enable();
         useItemAction.Enable();
         reloadAction.Enable();
+        runAction.Enable();
         attackAction.performed += OnFire;
         interactAction.performed += OnInteract;
         useItemAction.performed += OnUseItem;
         reloadAction.performed += OnReload;
+        runAction.performed += OnRun;
     }
 
     private void OnDisable()
@@ -90,13 +98,17 @@ public class PlayerBehaviour : MonoBehaviour
         interactAction.performed -= OnInteract;
         useItemAction.performed -= OnUseItem;
         reloadAction.performed -= OnReload;
+        runAction.performed -= OnRun;
     }
 
     private void Movement()
     {
         Vector3 direction = new Vector3(moveInput.x, 0f, moveInput.y);
         if (direction.magnitude > 1f) direction.Normalize();
-        rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
+
+        float speed = isRunning ? baseMoveSpeed * moveSpeedMultiplier : baseMoveSpeed;
+        Debug.Log("Current Move Speed: " + speed);
+        rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
     }
     private void Look()
     {
@@ -196,7 +208,11 @@ public class PlayerBehaviour : MonoBehaviour
             Debug.LogWarning("Tried to reload, but no weapon assigned!");
         }
     }
-
+    private void OnRun(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Run pressed");
+        isRunning = !isRunning;
+    }
     public void EquipWeapon(WeaponData newWeapon)
     {
         currentWeapon = newWeapon;
