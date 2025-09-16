@@ -20,7 +20,7 @@ public class BulletBehaviour : MonoBehaviour
         //destroy the bullet
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<Health>().TakeDamage(gameObject.GetComponent<WeaponData>().damage);
+            collision.gameObject.GetComponent<Health>().TakeDamage(20);
             Destroy(gameObject);
         }
     }
