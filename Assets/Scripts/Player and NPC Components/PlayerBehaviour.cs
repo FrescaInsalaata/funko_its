@@ -103,6 +103,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Movement()
     {
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         Vector3 direction = new Vector3(moveInput.x, 0f, moveInput.y);
         if (direction.magnitude > 1f) direction.Normalize();
 
