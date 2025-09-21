@@ -109,7 +109,6 @@ public class PlayerBehaviour : MonoBehaviour
         if (direction.magnitude > 1f) direction.Normalize();
 
         float speed = isRunning ? baseMoveSpeed * moveSpeedMultiplier : baseMoveSpeed;
-        Debug.Log("Current Move Speed: " + speed);
         rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
     }
     private void Look()
@@ -138,43 +137,61 @@ public class PlayerBehaviour : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        var pickup = other.GetComponent<PickupBehaviour>();
-        if (pickup != null)
-            nearbyPickup = pickup;
-        if (pickup.itemName.ToLower() == "healthpickup")
+        if (other.tag == "Pickup")
         {
-            Debug.Log("using health pickup...");
-            Health playerHealth = GetComponent<Health>();
-            if (playerHealth != null)
+            nearbyPickup = other.GetComponent<PickupBehaviour>();
+            if (nearbyPickup.itemName.ToLower() == "healthpickup")
             {
-                playerHealth.Heal(50);
-                Destroy(pickup.gameObject);
+                Debug.Log("using health pickup...");
+                Health playerHealth = GetComponent<Health>();
+                if (playerHealth != null)
+                {
+                    playerHealth.Heal(50);
+                    Destroy(nearbyPickup.gameObject);
+                }
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        var pickup = other.GetComponent<PickupBehaviour>();
-        if (pickup != null && pickup == nearbyPickup)
+        if (other.tag == "Pickup" && nearbyPickup != null)
+        {
             nearbyPickup = null;
+        }
     }
 
     private void OnInteract(InputAction.CallbackContext ctx)
     {
-        if (nearbyPickup == null) return;
-
-        if (nearbyPickup.weaponData != null)
+        if (nearbyPickup != null)
         {
-            Debug.Log("Picking up weapon: " + nearbyPickup.weaponData.weaponName);
-            EquipWeapon(nearbyPickup.weaponData);
-            Destroy(nearbyPickup.gameObject);
+            if (nearbyPickup.weaponData != null)
+            {
+                Debug.Log("Picking up weapon: " + nearbyPickup.weaponData.weaponName);
+                EquipWeapon(nearbyPickup.weaponData);
+                Destroy(nearbyPickup.gameObject);
+            }
+            else if (nearbyPickup.itemData != null)
+            {
+                Debug.Log("Picking up item: " + nearbyPickup.itemData.itemName);
+                EquipItem(nearbyPickup.itemData);
+                Destroy(nearbyPickup.gameObject);
+            }
+            return;
         }
-        else if (nearbyPickup.itemData != null)
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2f);
+        foreach (var hitCollider in hitColliders)
         {
-            Debug.Log("Picking up item: " + nearbyPickup.itemData.itemName);
-            EquipItem(nearbyPickup.itemData);
-            Destroy(nearbyPickup.gameObject);
+            if (hitCollider.tag == "InteractableDoor")
+            {
+                var door = hitCollider.GetComponent<InteractableDoorBehaviour>();
+                if (door != null)
+                {
+                    door.ToggleOpen();
+                    return;
+                }
+            }
         }
     }
     private void OnUseItem(InputAction.CallbackContext ctx)
