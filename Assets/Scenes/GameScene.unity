@@ -9520,16 +9520,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2453088944281548621, guid: 3bea33768e0ccde4eaaac448f3b4c4c2, type: 3}
       propertyPath: enemyPrefabs.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2453088944281548621, guid: 3bea33768e0ccde4eaaac448f3b4c4c2, type: 3}
       propertyPath: 'enemyPrefabs.Array.data[0]'
       value: 
-      objectReference: {fileID: 1961886817706789019, guid: 2cccb1dbb1ed72e4894ea5f96fe3ed11, type: 3}
+      objectReference: {fileID: 7035624772862494428, guid: 80107eaad579e2740911b77495c7b44c, type: 3}
     - target: {fileID: 2453088944281548621, guid: 3bea33768e0ccde4eaaac448f3b4c4c2, type: 3}
       propertyPath: 'enemyPrefabs.Array.data[1]'
       value: 
-      objectReference: {fileID: 1961886817706789019, guid: 2cccb1dbb1ed72e4894ea5f96fe3ed11, type: 3}
+      objectReference: {fileID: 1961886817706789019, guid: b26172b24ef9cf54ab94a30c864e6006, type: 3}
     - target: {fileID: 2453088944281548621, guid: 3bea33768e0ccde4eaaac448f3b4c4c2, type: 3}
       propertyPath: 'enemyPrefabs.Array.data[2]'
       value: 
