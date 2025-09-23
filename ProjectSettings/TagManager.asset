@@ -4,6 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Pickup
+  - Door
+  - InteractableDoor
   - Enemy
   layers:
   - Default

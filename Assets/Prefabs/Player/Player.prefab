@@ -33,8 +33,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.748007, y: 1.76, z: 10.073721}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.7500001, y: 1.7500001, z: 1.7500001}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2619516482325366108}
   - {fileID: 8992060969882927547}
@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2f5d13197ea144698e62259fcd7185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMoveSpeed: 5
-  moveSpeedMultiplier: 2
+  baseMoveSpeed: 8
+  moveSpeedMultiplier: 1.8
   currentWeapon: {fileID: 11400000, guid: 7066bd94c1afdcf448efa858b896e748, type: 2}
   handMount: {fileID: 8900909598549027725}
   firePoint: {fileID: 6388206203977857000, guid: c6d7b1e4dd76e054a9caff227117fb87, type: 3}

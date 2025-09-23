@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5443091662316004729}
   m_Layer: 0
   m_Name: EliteEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,7 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe937c7b1646aed47a446cf705dd36df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  current: 100
+  currentHealth: 100
+  maxHealth: 100
 --- !u!195 &8297103052798890876
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -163,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   detectionRange: 15
+  isFighting: 0
   targetPlayer: {fileID: 0}
   agent: {fileID: 0}
 --- !u!114 &5443091662316004729
@@ -179,6 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
   enemyType: 1
+  disengageRange: 20
   retreatDistance: 5
   walkRange: 5
   chargeRange: 8
