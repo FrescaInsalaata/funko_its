@@ -4,7 +4,12 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Pickup
+  - Door
+  - InteractableDoor
   - Enemy
+  - WeaponSpawnPoint
+  - PickupSpawnPoint
   layers:
   - Default
   - TransparentFX
