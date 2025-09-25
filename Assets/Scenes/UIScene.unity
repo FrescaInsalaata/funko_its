@@ -357,7 +357,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16737413}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
 --- !u!1 &20422923 stripped
+=======
+--- !u!1 &79581153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 79581157}
+  - component: {fileID: 79581156}
+  - component: {fileID: 79581154}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &79581154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79581153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b05f6e53c3eb41344b193b30965cc6cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerUIs:
+  - {fileID: 493930438}
+  - {fileID: 1636854998}
+  - {fileID: 530075379}
+  - {fileID: 263326046}
+--- !u!114 &79581156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79581153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ad6a51494abb94498b974e502bd3b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 1449577390}
+--- !u!4 &79581157
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79581153}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 33.944153, y: 161.14526, z: -118.85164}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1549785530}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &122451175 stripped
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7769046382868063213, guid: f1dce8cc988e90b44bd260ccd08437fd, type: 3}
   m_PrefabInstance: {fileID: 2055903103}
@@ -1265,6 +1332,7 @@ GameObject:
   - component: {fileID: 263326045}
   - component: {fileID: 263326044}
   - component: {fileID: 263326043}
+  - component: {fileID: 263326046}
   m_Layer: 5
   m_Name: PlayerUI4
   m_TagString: Untagged
@@ -1357,6 +1425,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263326041}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
 --- !u!1 &270695435 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8788472206638978311, guid: f1dce8cc988e90b44bd260ccd08437fd, type: 3}
@@ -1389,11 +1458,15 @@ GameObject:
   m_PrefabInstance: {fileID: 2055903103}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &284484401
+=======
+--- !u!114 &263326046
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
   m_GameObject: {fileID: 284484397}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1476,6 +1549,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 11.099068, y: 10.000001, z: 6}
   m_Center: {x: 0.5495336, y: -2.1316282e-14, z: 2.9999998}
+=======
+  m_GameObject: {fileID: 263326041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4f67b6bc1b0474f8cb229a454831a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoText: {fileID: 198135712}
+  healthText: {fileID: 855518373}
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
 --- !u!1001 &306551637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1555,7 +1638,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3582080433088116343, guid: 74c0e11fa146d1a40b675915aed87898, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1353509311}
   m_SourcePrefab: {fileID: 100100000, guid: 74c0e11fa146d1a40b675915aed87898, type: 3}
 --- !u!1 &336224318 stripped
 GameObject:
@@ -2384,6 +2470,7 @@ GameObject:
   - component: {fileID: 493930437}
   - component: {fileID: 493930436}
   - component: {fileID: 493930435}
+  - component: {fileID: 493930438}
   m_Layer: 5
   m_Name: PlayerUI1
   m_TagString: Untagged
@@ -2476,6 +2563,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493930433}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
 --- !u!1 &500391268 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2790966217079839884, guid: 1904af3b1e276cd4285fc722a123e78f, type: 3}
@@ -2486,6 +2574,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5390965913912810671, guid: 971895ebcd630874e8f7fa42a175a49d, type: 3}
   m_PrefabInstance: {fileID: 1545004292854378262}
   m_PrefabAsset: {fileID: 0}
+=======
+--- !u!114 &493930438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493930433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4f67b6bc1b0474f8cb229a454831a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoText: {fileID: 1008902453}
+  healthText: {fileID: 1191321984}
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
 --- !u!1 &530075374
 GameObject:
   m_ObjectHideFlags: 0
@@ -2498,6 +2602,7 @@ GameObject:
   - component: {fileID: 530075378}
   - component: {fileID: 530075377}
   - component: {fileID: 530075376}
+  - component: {fileID: 530075379}
   m_Layer: 5
   m_Name: PlayerUI3
   m_TagString: Untagged
@@ -2590,6 +2695,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530075374}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
 --- !u!1 &532470401 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3533969743031595080, guid: f1dce8cc988e90b44bd260ccd08437fd, type: 3}
@@ -2597,6 +2703,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &532470405
 BoxCollider:
+=======
+--- !u!114 &530075379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530075374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4f67b6bc1b0474f8cb229a454831a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoText: {fileID: 763556722}
+  healthText: {fileID: 1556146915}
+--- !u!43 &611147300
+Mesh:
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3977,6 +4101,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855518371}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
 --- !u!1 &868937590 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6965894373351113752, guid: f1dce8cc988e90b44bd260ccd08437fd, type: 3}
@@ -4063,6 +4188,9 @@ GameObject:
   m_PrefabInstance: {fileID: 1545004292854378262}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &878022717
+=======
+--- !u!1 &903315001
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4070,20 +4198,31 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
   - component: {fileID: 878022718}
   m_Layer: 0
   m_Name: Lighting
+=======
+  - component: {fileID: 903315002}
+  m_Layer: 0
+  m_Name: Spawn1
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
 --- !u!4 &878022718
+=======
+--- !u!4 &903315002
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
   m_GameObject: {fileID: 878022717}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -4380,6 +4519,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 11.099068, y: 10.000001, z: 6}
   m_Center: {x: 0.5495336, y: -0.0000038146973, z: 2.9999998}
+=======
+  m_GameObject: {fileID: 903315001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.08, y: 1.14, z: 24.696587}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
 --- !u!1 &979111577
 GameObject:
   m_ObjectHideFlags: 0
@@ -5166,6 +5316,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191321982}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
 --- !u!1 &1197929551 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1162489998539983720, guid: f1dce8cc988e90b44bd260ccd08437fd, type: 3}
@@ -5447,6 +5598,9 @@ BoxCollider:
   m_Size: {x: 0.015760994, y: 0.00834507, z: 0.008573104}
   m_Center: {x: -4.6566134e-10, y: -0.003387723, z: 0.004286552}
 --- !u!1 &1344417282
+=======
+--- !u!1 &1262210695
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5454,23 +5608,34 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
   - component: {fileID: 1344417283}
   - component: {fileID: 1344417286}
   - component: {fileID: 1344417285}
   - component: {fileID: 1344417284}
   m_Layer: 0
   m_Name: Chair.002 (1)
+=======
+  - component: {fileID: 1262210696}
+  m_Layer: 0
+  m_Name: Spawn2
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
 --- !u!4 &1344417283
+=======
+--- !u!4 &1262210696
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
   m_GameObject: {fileID: 1344417282}
   serializedVersion: 2
   m_LocalRotation: {x: -0.07329265, y: 0.7033588, z: -0.07330544, w: -0.70323604}
@@ -5582,11 +5747,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.5295463, y: 49.4728, z: 8.1888485}
   m_Center: {x: -0.014770812, y: 9.784428, z: 4.094421}
+=======
+  m_GameObject: {fileID: 1262210695}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.626526, y: 1.1399999, z: 24.696587}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1271549232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3582080433088116343, guid: 74c0e11fa146d1a40b675915aed87898, type: 3}
+  m_PrefabInstance: {fileID: 306551637}
+  m_PrefabAsset: {fileID: 0}
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
 --- !u!4 &1353509303 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8633394375317970480, guid: 74c0e11fa146d1a40b675915aed87898, type: 3}
   m_PrefabInstance: {fileID: 306551637}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
 --- !u!1 &1357140019 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 885015845788834261, guid: f1dce8cc988e90b44bd260ccd08437fd, type: 3}
@@ -5736,9 +5918,27 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1449577388
 GameObject:
+=======
+--- !u!114 &1353509311
+MonoBehaviour:
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271549232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 943b1c350b8d0f54084c5547904272f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: 7066bd94c1afdcf448efa858b896e748, type: 2}
+  currentAmmo: 0
+--- !u!1 &1449577388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1457523408005068676, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+  m_PrefabInstance: {fileID: 4341043058426490084}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
@@ -5755,8 +5955,8 @@ GameObject:
 --- !u!224 &1449577389
 RectTransform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+  m_PrefabInstance: {fileID: 4341043058426490084}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1449577388}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -5774,8 +5974,8 @@ RectTransform:
 --- !u!114 &1449577390
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 831273791538163867, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+  m_PrefabInstance: {fileID: 4341043058426490084}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1449577388}
   m_Enabled: 1
@@ -5791,7 +5991,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Timer
+  m_text: 00:05
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5865,8 +6065,8 @@ MonoBehaviour:
 --- !u!222 &1449577391
 CanvasRenderer:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2499976163165387158, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+  m_PrefabInstance: {fileID: 4341043058426490084}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1449577388}
   m_CullTransparentMesh: 1
@@ -5908,6 +6108,7 @@ Transform:
   - {fileID: 645852102}
   - {fileID: 378045445}
   - {fileID: 3124548358254488481}
+  - {fileID: 1890920737}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1454683708 stripped
@@ -6261,6 +6462,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 79581157}
   - {fileID: 3738064}
   - {fileID: 2145703515}
   m_Father: {fileID: 0}
@@ -6698,6 +6900,7 @@ GameObject:
   - component: {fileID: 1636854997}
   - component: {fileID: 1636854996}
   - component: {fileID: 1636854995}
+  - component: {fileID: 1636854998}
   m_Layer: 5
   m_Name: PlayerUI2
   m_TagString: Untagged
@@ -6790,6 +6993,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636854993}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
 --- !u!1 &1659501919 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1958872693071727127, guid: f1dce8cc988e90b44bd260ccd08437fd, type: 3}
@@ -6797,10 +7001,29 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &1659501922
 BoxCollider:
+=======
+--- !u!114 &1636854998
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636854993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4f67b6bc1b0474f8cb229a454831a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoText: {fileID: 16737415}
+  healthText: {fileID: 979111579}
+--- !u!1 &1890920736
+GameObject:
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
   m_GameObject: {fileID: 1659501919}
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -7146,10 +7369,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &1842548339
 BoxCollider:
+=======
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1890920737}
+  - component: {fileID: 1890920738}
+  m_Layer: 0
+  m_Name: PlayerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1890920737
+Transform:
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
   m_GameObject: {fileID: 1842548335}
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -7182,10 +7421,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &1886089381
 BoxCollider:
+=======
+  m_GameObject: {fileID: 1890920736}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1450460865}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1890920738
+MonoBehaviour:
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
   m_GameObject: {fileID: 1886089377}
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -7206,6 +7459,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5831577699705094299, guid: 1904af3b1e276cd4285fc722a123e78f, type: 3}
   m_PrefabInstance: {fileID: 3622793678227579139}
   m_PrefabAsset: {fileID: 0}
+=======
+  m_GameObject: {fileID: 1890920736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd926759ab6a0943b41ef44ff5eb7dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 3582080433088116343, guid: 74c0e11fa146d1a40b675915aed87898, type: 3}
+  spawnPoints:
+  - {fileID: 903315002}
+  - {fileID: 1262210696}
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
 --- !u!4 &1903183904 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7128104581157384082, guid: d28a09ed0f0053341ad4989fc4acd373, type: 3}
@@ -9188,12 +9453,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1451342056715636262, guid: af3483a69c4cc3241b3265743350ed96, type: 3}
   m_PrefabInstance: {fileID: 3124548358254488480}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
 --- !u!1001 &3622793678227579139
+=======
+--- !u!1001 &4341043058426490084
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 33378285267447147, guid: 1904af3b1e276cd4285fc722a123e78f, type: 3}
@@ -9240,11 +9510,103 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawnPoints
       objectReference: {fileID: 0}
+=======
+    m_TransformParent: {fileID: 3738064}
+    m_Modifications:
+    - target: {fileID: 1457523408005068676, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_Name
+      value: GameTimer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_Pivot.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528023430430222979, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
   m_SourcePrefab: {fileID: 100100000, guid: 1904af3b1e276cd4285fc722a123e78f, type: 3}
+=======
+  m_SourcePrefab: {fileID: 100100000, guid: 5664943c01755dc4485136ad31d89ce5, type: 3}
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
 --- !u!1001 &5874571650053869211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9537,8 +9899,15 @@ SceneRoots:
   - {fileID: 1450460865}
   - {fileID: 306551637}
   - {fileID: 1549785530}
+<<<<<<< HEAD:Assets/Scenes/GameScene.unity
   - {fileID: 2055903103}
   - {fileID: 3622793678227579139}
   - {fileID: 1545004292854378262}
   - {fileID: 2027508543}
   - {fileID: 878022718}
+=======
+  - {fileID: 2646501943183693286}
+  - {fileID: 755808873}
+  - {fileID: 903315002}
+  - {fileID: 1262210696}
+>>>>>>> alessio-dev:Assets/Scenes/UIScene.unity
