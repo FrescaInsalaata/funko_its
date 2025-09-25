@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     {
         // Controlla se ci sono già player nella scena
         PlayerBehaviour[] existingPlayers = FindObjectsByType<PlayerBehaviour>(FindObjectsSortMode.None);
+        Debug.Log("Player esistenti trovati: " + existingPlayers.Length);
         foreach (var player in existingPlayers)
         {
             if (playerCount < spawnPoints.Length)
