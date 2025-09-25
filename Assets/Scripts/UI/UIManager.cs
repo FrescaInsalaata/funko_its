@@ -5,6 +5,12 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     public PlayerUI[] playerUIs; // array di 4 pannelli UI
 
+
+    private void Start()
+    {
+        foreach (var ui in playerUIs)
+            ui.gameObject.SetActive(false);
+    }
     private void Awake()
     {
         if (Instance == null) Instance = this;

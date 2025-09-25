@@ -857,7 +857,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3582080433088116343, guid: 74c0e11fa146d1a40b675915aed87898, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1353509311}
   m_SourcePrefab: {fileID: 100100000, guid: 74c0e11fa146d1a40b675915aed87898, type: 3}
 --- !u!4 &378045445 stripped
 Transform:
@@ -3163,7 +3166,7 @@ Transform:
   m_GameObject: {fileID: 903315001}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.323475, y: -7.6745877, z: 24.696587}
+  m_LocalPosition: {x: 10.08, y: 1.14, z: 24.696587}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3602,17 +3605,36 @@ Transform:
   m_GameObject: {fileID: 1262210695}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.87, y: -7.6745877, z: 24.696587}
+  m_LocalPosition: {x: 14.626526, y: 1.1399999, z: 24.696587}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1271549232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3582080433088116343, guid: 74c0e11fa146d1a40b675915aed87898, type: 3}
+  m_PrefabInstance: {fileID: 306551637}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1353509303 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8633394375317970480, guid: 74c0e11fa146d1a40b675915aed87898, type: 3}
   m_PrefabInstance: {fileID: 306551637}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1353509311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271549232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 943b1c350b8d0f54084c5547904272f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: 7066bd94c1afdcf448efa858b896e748, type: 2}
+  currentAmmo: 0
 --- !u!1 &1449577388
 GameObject:
   m_ObjectHideFlags: 0

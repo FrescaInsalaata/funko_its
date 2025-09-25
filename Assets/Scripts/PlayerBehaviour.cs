@@ -12,6 +12,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Weapon")]
     public WeaponData currentWeapon;
+    private WeaponInstance myWeaponInstance;
     public GameObject handMount;
     private GameObject weaponInstance;
     public GameObject firePoint;
@@ -49,6 +50,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (currentWeapon != null)
             EquipWeapon(currentWeapon);
     }
+
     private void Update()
     {
         moveInput = moveAction.ReadValue<Vector2>();
@@ -191,24 +193,17 @@ public class PlayerBehaviour : MonoBehaviour
     }
     private void OnFire(InputAction.CallbackContext ctx)
     {
-        if (currentWeapon != null)
+        if (myWeaponInstance != null)
         {
-            currentWeapon.Fire(firePoint, playerID);
-        }
-        else
-        {
-            Debug.LogWarning("Tried to attack, but no weapon assigned!");
+            myWeaponInstance.Fire(firePoint, playerID);
         }
     }
+
     private void OnReload(InputAction.CallbackContext ctx)
     {
-        if (currentWeapon != null)
+        if (myWeaponInstance != null)
         {
-            currentWeapon.Reload(this, playerID);
-        }
-        else
-        {
-            Debug.LogWarning("Tried to reload, but no weapon assigned!");
+            myWeaponInstance.Reload(this, playerID);
         }
     }
     private void OnRun(InputAction.CallbackContext ctx)
@@ -225,13 +220,18 @@ public class PlayerBehaviour : MonoBehaviour
         weaponInstance = Instantiate(currentWeapon.weaponPrefab, handMount.transform);
         weaponInstance.transform.localScale = Vector3.one;
 
-        // **Setta l’arma con ammo massima e aggiorna la UI**
-        currentWeapon.SetMaxAmmo(playerID);
+        myWeaponInstance = new WeaponInstance(currentWeapon);
+
+        // Aggiorna la UI
+        UIManager.Instance.updateAmmo(playerID, Mathf.RoundToInt(myWeaponInstance.currentAmmo));
 
         // Trova il firePoint nella nuova arma
         firePoint = weaponInstance.transform.Find("FirePoint")?.gameObject;
+        if (firePoint == null)
+        {
+            Debug.LogError("FirePoint non trovato nell'arma: " + weaponInstance.name);
+        }
     }
-
 
     public void EquipItem(ItemData newItem)
     {

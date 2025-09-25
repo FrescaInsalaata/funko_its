@@ -8,7 +8,43 @@ public class PlayerManager : MonoBehaviour
 
     private int playerCount = 0;         // Conta quanti player sono stati spawnati
 
-    // Funzione pubblica per spawnare un nuovo player
+    void Start()
+    {
+        // Controlla se ci sono già player nella scena
+        PlayerBehaviour[] existingPlayers = FindObjectsByType<PlayerBehaviour>(FindObjectsSortMode.None);
+        foreach (var player in existingPlayers)
+        {
+            if (playerCount < spawnPoints.Length)
+            {
+                player.playerID = playerCount;
+
+                var health = player.GetComponent<Health>();
+                if (health != null)
+                    health.playerID = playerCount;
+
+                // Attiva UI SOLO se UIManager è già pronto
+                if (UIManager.Instance != null)
+                    UIManager.Instance.playerUIs[playerCount].gameObject.SetActive(true);
+
+                playerCount++;
+            }
+            else
+            {
+                Debug.LogWarning("Numero massimo di player raggiunto, player aggiuntivo ignorato!");
+            }
+        }
+    }
+
+
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SpawnPlayer();
+        }
+    }
+
     public void SpawnPlayer()
     {
         if (playerCount >= spawnPoints.Length)
@@ -21,10 +57,19 @@ public class PlayerManager : MonoBehaviour
         GameObject newPlayer = Instantiate(playerPrefab, spawnPoints[playerCount].position, spawnPoints[playerCount].rotation);
 
         // Assegna un ID univoco
-        newPlayer.GetComponent<PlayerBehaviour>().playerID = playerCount;
-        newPlayer.GetComponent<Health>().playerID = playerCount;
+        var pb = newPlayer.GetComponent<PlayerBehaviour>();
+        pb.playerID = playerCount;
+
+        var health = newPlayer.GetComponent<Health>();
+        health.playerID = playerCount;
 
         Debug.Log("Player " + playerCount + " spawnato.");
+
+        // Attiva la UI corrispondente al player
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.playerUIs[playerCount].gameObject.SetActive(true);
+        }
 
         playerCount++;
     }
