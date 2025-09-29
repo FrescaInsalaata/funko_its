@@ -10,6 +10,14 @@ public class PlayerBehaviour : MonoBehaviour
     private float moveSpeed;
     private bool isRunning;
 
+    [Header("Animation")]
+    private Animator animator;
+    private static readonly int SpeedHash = Animator.StringToHash("Speed");
+    private static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
+    private static readonly int FireHash = Animator.StringToHash("Fire");
+    private static readonly int ReloadHash = Animator.StringToHash("Reload");
+    private static readonly int DeathHash = Animator.StringToHash("Death");
+
     [Header("Weapon")]
     public WeaponData currentWeapon;
     private WeaponInstance myWeaponInstance;
@@ -25,7 +33,7 @@ public class PlayerBehaviour : MonoBehaviour
     public Camera mainCamera;
     public LayerMask groundMask;
 
-    private PlayerInput playerInput;
+    public PlayerInput playerInput;
     private InputAction moveAction;
     private InputAction attackAction;
     private InputAction interactAction;
@@ -41,26 +49,8 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 lastLookDirection;
     private PickupBehaviour nearbyPickup;
 
-
     public int playerID;
 
-
-    private void Start()
-    {
-        if (currentWeapon != null)
-            EquipWeapon(currentWeapon);
-    }
-
-    private void Update()
-    {
-        moveInput = moveAction.ReadValue<Vector2>();
-        lookInput = lookAction.ReadValue<Vector2>();
-    }
-    private void FixedUpdate()
-    {
-        Movement();
-        Look();
-    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -74,6 +64,13 @@ public class PlayerBehaviour : MonoBehaviour
         runAction = playerInput.actions["Run"];
 
         moveSpeed = baseMoveSpeed;
+
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
+        if (animator == null)
+            Debug.LogWarning("Animator not assigned and not found in children. Assign it in the Inspector.");
+        if (animator != null)
+            animator.applyRootMotion = false;
     }
 
     private void OnEnable()
@@ -107,29 +104,58 @@ public class PlayerBehaviour : MonoBehaviour
         runAction.performed -= OnRun;
     }
 
+    private void Start()
+    {
+        if (currentWeapon != null)
+            EquipWeapon(currentWeapon);
+    }
+
+    private void Update()
+    {
+        moveInput = moveAction.ReadValue<Vector2>();
+        lookInput = lookAction.ReadValue<Vector2>();
+    }
+
+    private void FixedUpdate()
+    {
+        Movement();
+        Look();
+    }
+
     private void Movement()
     {
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         Vector3 direction = new Vector3(moveInput.x, 0f, moveInput.y);
-        if (direction.magnitude > 1f) direction.Normalize();
-
-        float speed = isRunning ? baseMoveSpeed * moveSpeedMultiplier : baseMoveSpeed;
-        rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
+        if (direction.magnitude > 1f)
+        {
+            direction.Normalize();
+        } else if (direction.magnitude < 0.1f)
+        {
+            Debug.Log("Not moving");
+            animator.SetBool(IsMovingHash, false);
+            return;
+        }
+        rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
+        Debug.Log("Moving");
+        animator.SetBool(IsMovingHash, true);
     }
+
     private void Look()
     {
+        // Default to zero
         lookDir = Vector3.zero;
 
-        // Mouse first (if valid raycast)
+        // Ray to floor plane
+        Plane groundPlane = new Plane(Vector3.up, transform.position);
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f, groundMask))
+        if (groundPlane.Raycast(ray, out float distance))
         {
-            Vector3 lookPos = hit.point;
-            lookPos.y = transform.position.y;
-            lookDir = (lookPos - transform.position).normalized;
+            Vector3 hitPoint = ray.GetPoint(distance);
+            lookDir = (hitPoint - transform.position);
+            lookDir.y = 0f;
+            lookDir.Normalize();
         }
-        // Otherwise fallback to stick
         else if (lookInput.sqrMagnitude > 0.01f)
         {
             lookDir = new Vector3(lookInput.x, 0f, lookInput.y).normalized;
@@ -137,10 +163,13 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (lookDir.sqrMagnitude > 0.01f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(lookDir, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.2f);
+            float rotationSpeed = 720f; // degrees per second
+            Quaternion targetRotation = Quaternion.LookRotation(lookDir);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Pickup")
@@ -200,6 +229,7 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
     }
+
     private void OnUseItem(InputAction.CallbackContext ctx)
     {
         if (currentItem != null && currentItem.uses >= 0 && throwMount != null)
@@ -211,11 +241,16 @@ public class PlayerBehaviour : MonoBehaviour
             Debug.LogWarning("Tried to use item, but no item or throw mount assigned!");
         }
     }
+
     private void OnFire(InputAction.CallbackContext ctx)
     {
         if (myWeaponInstance != null)
         {
             myWeaponInstance.Fire(firePoint, playerID);
+            if (animator != null)
+            {
+                animator.SetTrigger(FireHash);
+            }
         }
     }
 
@@ -224,12 +259,18 @@ public class PlayerBehaviour : MonoBehaviour
         if (myWeaponInstance != null)
         {
             myWeaponInstance.Reload(this, playerID);
+            if (animator != null)
+            {
+                animator.SetTrigger(ReloadHash);
+            }
         }
     }
+
     private void OnRun(InputAction.CallbackContext ctx)
     {
         isRunning = !isRunning;
     }
+
     public void EquipWeapon(WeaponData newWeapon)
     {
         currentWeapon = newWeapon;

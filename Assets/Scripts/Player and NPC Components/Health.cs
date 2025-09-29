@@ -1,5 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Health : MonoBehaviour
 {
@@ -40,7 +41,13 @@ public class Health : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        if (GetComponent<Animator>() != null)
+            GetComponent<Animator>().SetTrigger("DeathHash");
+
+        // disable input & movement (you can replace this with ragdoll activation)
+        if (GetComponent<PlayerBehaviour>().playerInput != null)
+            GetComponent<PlayerBehaviour>().playerInput.enabled = false;
+        Destroy(gameObject, 5f);
     }
 
     void UpdateColor()
