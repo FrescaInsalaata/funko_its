@@ -28,6 +28,8 @@ public class AttackAI : MonoBehaviour
     private float sqrChargeRange;
     private float sqrDistance;
 
+    private Animator animator;
+
     void Start()
     {
         enemyCore = GetComponent<EnemyCore>();
@@ -36,6 +38,7 @@ public class AttackAI : MonoBehaviour
         sqrMeleeRange = weapon.range * weapon.range;
         sqrWalkRange = walkRange * walkRange;
         sqrChargeRange = chargeRange * chargeRange;
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -133,6 +136,7 @@ public class AttackAI : MonoBehaviour
                 lastAttackTime = Time.time;
                 // TODO: Melee attack implementation
                 weapon.MeleeAttack(transform, enemyCore.targetPlayer.gameObject);
+                animator.SetTrigger("Death");
             }
 
             // Keep the agent stopped during the cooldown

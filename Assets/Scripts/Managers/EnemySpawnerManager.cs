@@ -63,7 +63,6 @@ public class EnemySpawnerManager : MonoBehaviour
             return;
 
         enemiesToSpawn--;
-        Debug.Log($"Enemies left to spawn: {enemiesToSpawn}");
 
         int currentArea = GameManager.Instance.GetCurrentArea();
         GameObject enemyToSpawn = null;
@@ -101,19 +100,19 @@ public class EnemySpawnerManager : MonoBehaviour
         switch (currentArea)
         {
             case 0:
-                Debug.Log("Spawning in Area 0");
+
                 spawnPoint = area0SpawnPoints[Random.Range(0, area0SpawnPoints.Length)].transform;
                 break;
             case 1:
-                Debug.Log("Spawning in Area 1");
+
                 spawnPoint = area1SpawnPoints[Random.Range(0, area1SpawnPoints.Length)].transform;
                 break;
             case 2:
-                Debug.Log("Spawning in Area 2");
+
                 spawnPoint = area2SpawnPoints[Random.Range(0, area2SpawnPoints.Length)].transform;
                 break;
             case 3:
-                Debug.Log("Spawning in Area 3");
+
                 spawnPoint = area3SpawnPoints[Random.Range(0, area3SpawnPoints.Length)].transform;
                 break;
         }

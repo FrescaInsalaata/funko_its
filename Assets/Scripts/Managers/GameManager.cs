@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
     }
     void InitializeAreas()
     {
-        Debug.Log("Initializing Areas");
         for (int i = 0; i < areas.Length; i++)
         {
             areas[i].BuildArea();

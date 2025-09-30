@@ -12,6 +12,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Weapon")]
     public WeaponData currentWeapon;
+    private WeaponInstance myWeaponInstance;
     public GameObject handMount;
     private GameObject weaponInstance;
     public GameObject firePoint;
@@ -40,11 +41,16 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 lastLookDirection;
     private PickupBehaviour nearbyPickup;
 
+
+    public int playerID;
+
+
     private void Start()
     {
         if (currentWeapon != null)
             EquipWeapon(currentWeapon);
     }
+
     private void Update()
     {
         moveInput = moveAction.ReadValue<Vector2>();
@@ -207,29 +213,21 @@ public class PlayerBehaviour : MonoBehaviour
     }
     private void OnFire(InputAction.CallbackContext ctx)
     {
-        if (currentWeapon != null)
+        if (myWeaponInstance != null)
         {
-            currentWeapon.Fire(firePoint);
-        }
-        else
-        {
-            Debug.LogWarning("Tried to attack, but no weapon assigned!");
+            myWeaponInstance.Fire(firePoint, playerID);
         }
     }
+
     private void OnReload(InputAction.CallbackContext ctx)
     {
-        if (currentWeapon != null)
+        if (myWeaponInstance != null)
         {
-            currentWeapon.Reload(this);
-        }
-        else
-        {
-            Debug.LogWarning("Tried to reload, but no weapon assigned!");
+            myWeaponInstance.Reload(this, playerID);
         }
     }
     private void OnRun(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Run pressed");
         isRunning = !isRunning;
     }
     public void EquipWeapon(WeaponData newWeapon)
@@ -241,17 +239,22 @@ public class PlayerBehaviour : MonoBehaviour
 
         weaponInstance = Instantiate(currentWeapon.weaponPrefab, handMount.transform);
         weaponInstance.transform.localScale = Vector3.one;
-        currentWeapon.SetMaxAmmo();
 
-        // Find firepoint in the new weapon
+        myWeaponInstance = new WeaponInstance(currentWeapon);
+
+        // Aggiorna la UI
+        UIManager.Instance.updateAmmo(playerID, Mathf.RoundToInt(myWeaponInstance.currentAmmo));
+
+        // Trova il firePoint nella nuova arma
         firePoint = weaponInstance.transform.Find("FirePoint")?.gameObject;
-
-        Debug.Log("Equipped " + newWeapon.weaponName);
+        if (firePoint == null)
+        {
+            Debug.LogError("FirePoint non trovato nell'arma: " + weaponInstance.name);
+        }
     }
 
     public void EquipItem(ItemData newItem)
     {
         currentItem = newItem;
-        Debug.Log("Equipped item: " + newItem.itemName);
     }
 }
