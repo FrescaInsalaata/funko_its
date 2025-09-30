@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/FBX.meta
 guid: e0a46f0a413aff144b1756d93f54991d
+========
+guid: b026dc5edcaebf740a0a84473af72bb2
+>>>>>>>> f7921de7ca0ad1fbc77a146740376fe691edaf0f:Assets/FBX/Weapons.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
