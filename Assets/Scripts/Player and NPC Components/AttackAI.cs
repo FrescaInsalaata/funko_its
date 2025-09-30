@@ -43,6 +43,8 @@ public class AttackAI : MonoBehaviour
 
     void Update()
     {
+        //ALL THIS LOGIC HAS BEEN TEMPORARILY DISABLED TO SIMPLIFY GAME
+        /*
         if (enemyCore.targetPlayer == null || !enemyCore.isFighting)
         {
             if (enemyCore.agent.isOnNavMesh)
@@ -61,7 +63,7 @@ public class AttackAI : MonoBehaviour
             enemyCore.agent.ResetPath();
             return;
         } //When I chase player, if player is too far, I disengage
-
+        */
 
         sqrDistance = (enemyCore.targetPlayer.position - transform.position).sqrMagnitude;
         //Otherwise... I chase and attack!

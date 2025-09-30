@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerBehaviour : MonoBehaviour
@@ -214,20 +215,6 @@ public class PlayerBehaviour : MonoBehaviour
             }
             return;
         }
-
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2f);
-        foreach (var hitCollider in hitColliders)
-        {
-            if (hitCollider.tag == "InteractableDoor")
-            {
-                var door = hitCollider.GetComponent<InteractableDoorBehaviour>();
-                if (door != null)
-                {
-                    door.ToggleOpen();
-                    return;
-                }
-            }
-        }
     }
 
     private void OnUseItem(InputAction.CallbackContext ctx)
@@ -297,5 +284,20 @@ public class PlayerBehaviour : MonoBehaviour
     public void EquipItem(ItemData newItem)
     {
         currentItem = newItem;
+    }
+
+    public void ApplyVibeCheck(float multSpeedBoost, float duration)
+    {
+        // Apply the speed boost
+        moveSpeed *= multSpeedBoost;
+
+        // Start a coroutine to reset the speed after the duration
+        StartCoroutine(ResetSpeedAfterDelay(duration, multSpeedBoost));
+    }
+
+    private IEnumerator ResetSpeedAfterDelay(float delay, float multSpeedBoost)
+    {
+        yield return new WaitForSeconds(delay);
+        moveSpeed /= multSpeedBoost;
     }
 }

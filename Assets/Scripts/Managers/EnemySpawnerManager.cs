@@ -52,7 +52,7 @@ public class EnemySpawnerManager : MonoBehaviour
             SpawnEnemy();
             timer = 0f;
         }
-        if (enemiesToSpawn <= 0)
+        if (enemiesToSpawn <= 0 && !IsAnyEnemyAlive())
         {
             StartCoroutine(GameManager.Instance.CompletedArea());
         }
@@ -127,6 +127,10 @@ public class EnemySpawnerManager : MonoBehaviour
     {
         if (currentFacebreakers > 0)
             currentFacebreakers--;
+    }
+    private bool IsAnyEnemyAlive()
+    {
+        return GameObject.FindGameObjectsWithTag("Enemy").Length > 0;
     }
 }
 
