@@ -24,18 +24,8 @@ public class MainMenuUI : MonoBehaviour
     {
         Debug.Log("[MainMenuUI] QuitGame called");
 
-#if UNITY_EDITOR
+        UNITY_EDITOR
         EditorApplication.isPlaying = false; // ferma Play Mode in Editor
-#else
-        Application.Quit(); // chiude nella build
-        try
-        {
-            System.Environment.Exit(0); // forza chiusura del processo se serve
-        }
-        catch (Exception e)
-        {
-            Debug.LogWarning("Environment.Exit failed: " + e);
-        }
-#endif
+
     }
 }
