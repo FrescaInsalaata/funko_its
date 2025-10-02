@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,6 +8,12 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerBehaviour : MonoBehaviour
 {
+    [Header("Camera")]
+    private CinemachineTargetGroup targetGroup;
+
+    [Header("Player Colors")]
+    public Color[] playerColors; // e.g., [0] = blue, [1] = red
+
     [Header("Movement")]
     public float baseMoveSpeed = 5f;
     public float moveSpeedMultiplier = 2f;
@@ -57,6 +65,7 @@ public class PlayerBehaviour : MonoBehaviour
     private PickupBehaviour nearbyPickup;
 
     public int playerID;
+    int index;
 
     private void Awake()
     {
@@ -116,6 +125,17 @@ public class PlayerBehaviour : MonoBehaviour
     private void Start()
     {
         EquipWeapon(currentWeapon);
+        ApplyPlayerColor();
+        if (targetGroup == null)
+        {
+            targetGroup = FindFirstObjectByType<CinemachineTargetGroup>();
+            if (targetGroup == null)
+            {
+                Debug.LogError("No CinemachineTargetGroup found in the scene. Please add one.");
+                return;
+            }
+            targetGroup.AddMember(this.transform, 1f, 1f);
+        }
     }
 
     private void Update()
@@ -128,6 +148,16 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Movement();
         Look();
+    }
+    private void ApplyPlayerColor()
+    {
+        index = Mathf.Clamp(playerInput.playerIndex, 0, playerColors.Length - 1);
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        foreach (Renderer rend in renderers)
+        {
+            rend.material = new Material(rend.material); // Instance material
+            rend.material.color = playerColors[index];
+        }
     }
 
     private void Movement()
@@ -250,7 +280,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (myWeaponInstance != null)
         {
-            myWeaponInstance.Fire(firePoint, playerID);
+            myWeaponInstance.Fire(firePoint, playerID, playerColors[index]);
             if (animator != null)
             {
                 animator.SetTrigger(FireHash);
@@ -300,6 +330,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Debug.Log("FirePoint trovato: " + firePoint.name);
         }
+        ApplyPlayerColor();
     }
 
     public void EquipItem(ItemData newItem)

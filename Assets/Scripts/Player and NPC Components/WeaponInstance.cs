@@ -15,7 +15,7 @@ public class WeaponInstance
         currentAmmo = data.maxAmmo;
     }
 
-    public void Fire(GameObject firePoint, int playerID)
+    public void Fire(GameObject firePoint, int playerID, Color playerColor)
     {
         if (firePoint == null || currentAmmo <= 0 || weaponData.projectilePrefab == null)
         {
@@ -35,7 +35,8 @@ public class WeaponInstance
         BulletBehaviour bulletBehaviour = bullet.GetComponent<BulletBehaviour>();
         if (bulletBehaviour != null)
         {
-            bulletBehaviour.GetDamage(weaponData.damage);
+            bulletBehaviour.SetDamage(weaponData.damage);
+            bulletBehaviour.SetColor(playerColor); 
         }
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)

@@ -29,6 +29,7 @@ public class ItemData : ScriptableObject
             applies a wave of fun for teammates in a short area, letting them move faster*/
             if (itemName == "VibeCheck")
             {
+                Debug.Log("Using VibeCheck on " + player.name);
                 player.GetComponent<PlayerBehaviour>().ApplyVibeCheck(multSpeedBoost, duration);
                 Destroy(this);
             }

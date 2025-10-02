@@ -9,6 +9,7 @@ public class AttackAI : MonoBehaviour
     public float disengageRange = 20f;
     private float lastAttackTime;
     private EnemyCore enemyCore;
+    private AudioSource stabAudio;
 
     [Header("Elite Specific (EDIT ONLY IF ELITE)")]
     public float retreatDistance = 5f;
@@ -37,6 +38,7 @@ public class AttackAI : MonoBehaviour
         sqrWalkRange = walkRange * walkRange;
         sqrChargeRange = chargeRange * chargeRange;
         animator = GetComponent<Animator>();
+        stabAudio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -97,6 +99,7 @@ public class AttackAI : MonoBehaviour
                 lastAttackTime = Time.time;
                 weapon.MeleeAttack(transform, enemyCore.targetPlayer.gameObject);
                 animator.SetBool("IsAttacking", true);
+                stabAudio.Play();
                 StartCoroutine(ResetAttackAnimation());
             }
             return;

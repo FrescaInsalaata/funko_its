@@ -193,12 +193,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2f5d13197ea144698e62259fcd7185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerColors:
+  - {r: 0.29369166, g: 0.5569572, b: 0.93207544, a: 0}
+  - {r: 0.94716984, g: 0.27700236, b: 0.48946297, a: 0}
+  - {r: 0.46586442, g: 1, b: 0.26226407, a: 0}
+  - {r: 0.9584753, g: 1, b: 0.066037595, a: 0}
   baseMoveSpeed: 9
   moveSpeedMultiplier: 2
   coltPistolWeaponData: {fileID: 11400000, guid: 354d74e8f8941774cbd006c331d9c9ca, type: 2}
   ak47RifleWeaponData: {fileID: 11400000, guid: 10f08057a3f891647b9cb4a61f1ae0b0, type: 2}
   revolverWeaponData: {fileID: 11400000, guid: 7066bd94c1afdcf448efa858b896e748, type: 2}
-  currentWeapon: {fileID: 11400000, guid: 10f08057a3f891647b9cb4a61f1ae0b0, type: 2}
+  currentWeapon: {fileID: 11400000, guid: 354d74e8f8941774cbd006c331d9c9ca, type: 2}
   handMount: {fileID: 471218707399021306}
   firePoint: {fileID: 0}
   currentItem: {fileID: 0}

@@ -33,8 +33,17 @@ public class BulletBehaviour : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void GetDamage(float damage)
+    public void SetDamage(float damage)
     {
         bulletDamage = damage;
+    }
+
+    public void SetColor(Color color)
+    {
+        Renderer rend = GetComponent<Renderer>();
+        if (rend != null)
+        {
+            rend.material.color = color;
+        }
     }
 }

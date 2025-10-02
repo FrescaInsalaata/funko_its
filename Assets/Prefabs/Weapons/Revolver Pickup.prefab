@@ -17,6 +17,18 @@ PrefabInstance:
       value: Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 6808760243488326482, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808760243488326482, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808760243488326482, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808760243488326482, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
