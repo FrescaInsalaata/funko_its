@@ -24,7 +24,6 @@ public class MainMenuUI : MonoBehaviour
     {
         Debug.Log("[MainMenuUI] QuitGame called");
 
-        UNITY_EDITOR
         EditorApplication.isPlaying = false; // ferma Play Mode in Editor
 
     }
