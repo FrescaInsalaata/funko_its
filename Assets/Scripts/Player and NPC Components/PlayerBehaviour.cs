@@ -138,7 +138,8 @@ public class PlayerBehaviour : MonoBehaviour
         if (direction.magnitude > 1f)
         {
             direction.Normalize();
-        } else if (direction.magnitude < 0.1f)
+        }
+        else if (direction.magnitude < 0.1f)
         {
             animator.SetBool(IsMovingHash, false);
             return;
@@ -149,21 +150,40 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Look()
     {
+        float rotationSpeed = 10f; // Expose as a field if needed
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100f, groundMask))
+        // Controller look has priority if present
+        if (lookInput != Vector2.zero)
         {
-            Vector3 targetPosition = hit.point;
-            // direzione dal player al punto
-            Vector3 direction = targetPosition - transform.position;
-            direction.y = 0; // opzionale: ignora l’asse Y per non inclinare il personaggio
-
-            if (direction.magnitude > 0.1f)
+            lookDir = new Vector3(lookInput.x, 0f, lookInput.y);
+            lastLookDirection = lookDir;
+            Quaternion targetRotation = Quaternion.LookRotation(lookDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
+        // Mouse look if moving
+        else if (moveInput != Vector2.zero)
+        {
+            if (Physics.Raycast(ray, out hit, 100f, groundMask))
             {
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+                Vector3 targetPosition = hit.point;
+                Vector3 direction = targetPosition - transform.position;
+                direction.y = 0;
+
+                if (direction.magnitude > 0.1f)
+                {
+                    lastLookDirection = direction; // Update here too
+                    Quaternion targetRotation = Quaternion.LookRotation(direction);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+                }
             }
+        }
+        // Idle: keep last direction
+        else if (lastLookDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(lastLookDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
     }
 
