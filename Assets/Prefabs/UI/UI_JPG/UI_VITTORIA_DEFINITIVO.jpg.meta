@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9eeff48ce2495324fa7057dcf5f59fca
+guid: 4238f76f204087e4cb2c2cfafdec4405
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -95,12 +95,34 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: UI_VITTORIA_DEFINITIVO_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1920
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d23de3402a7ec124e907990e40f17226
+      internalID: 962104377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: fd07a35bdf0bb9e418a405ea079fd376
     internalID: 0
     vertices: []
     indices: 
@@ -109,7 +131,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UI_VITTORIA_DEFINITIVO_0: 962104377
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

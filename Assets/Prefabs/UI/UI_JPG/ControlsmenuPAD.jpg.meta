@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9eeff48ce2495324fa7057dcf5f59fca
+guid: 26fd43ffb4951a84292a9bb55ddb4047
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -95,12 +95,34 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: ControlsmenuPAD_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 3508
+        height: 2476
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51a421250baab6341a524cfed0297fe1
+      internalID: -150524655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 53c3fe4ff45eeb34d8f4b0f88f401a4f
     internalID: 0
     vertices: []
     indices: 
@@ -109,7 +131,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ControlsmenuPAD_0: -150524655
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

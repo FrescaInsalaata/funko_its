@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9eeff48ce2495324fa7057dcf5f59fca
+guid: 81f51a02c7982824ab1b31f31c358ec4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -95,12 +95,34 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: UI_GAME OVER_DEFINITIVO_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1920
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5e3ad024dfac0c4cbd6a08199402d15
+      internalID: 1664017427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 9a2a0692fa63f6d469160b41e51dc5f5
     internalID: 0
     vertices: []
     indices: 
@@ -109,7 +131,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UI_GAME OVER_DEFINITIVO_0: 1664017427
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
