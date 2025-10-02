@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 252b76bd895a27240ae710c3112215b3, type: 3}
+  m_Name: ColtPistol
+  m_EditorClassIdentifier: 
+  weaponName: ColtPistol
+  damage: 25
+  fireRate: 6
+  range: 0
+  maxAmmo: 12
+  reloadTime: 3
+  isReloading: 0
+  weaponType: 1
+  bulletType: 1
+  projectilePrefab: {fileID: 5629096558020621899, guid: c8f91e6251b04c047afbaba8f0380511, type: 3}
+  weaponPrefab: {fileID: 1090167109481366465, guid: 431584647c8db1d468d515f60ea14196, type: 3}
+  projectileSpeed: 35

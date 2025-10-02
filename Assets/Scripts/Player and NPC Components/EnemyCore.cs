@@ -43,7 +43,6 @@ public class EnemyCore : MonoBehaviour
                 targetPlayer = player.transform;
             }
         }
-
         if (minDistance > detectionRange)
         {
             isFighting = false;

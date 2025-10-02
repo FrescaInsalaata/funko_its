@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2856373256200190168
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6140169845999458792, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_Name
+      value: Revolver Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140169845999458792, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_TagString
+      value: Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808760243488326482, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808760243488326482, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808760243488326482, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808760243488326482, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808760243488326482, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808760243488326482, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808760243488326482, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808760243488326482, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808760243488326482, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808760243488326482, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6140169845999458792, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4547605564612376814}
+    - targetCorrespondingSourceObject: {fileID: 6140169845999458792, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1536317860890886761}
+    - targetCorrespondingSourceObject: {fileID: 6140169845999458792, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7452666401425914242}
+  m_SourcePrefab: {fileID: 100100000, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+--- !u!1 &8256685427946168624 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6140169845999458792, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
+  m_PrefabInstance: {fileID: 2856373256200190168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4547605564612376814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8256685427946168624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a1de79f1a6ea4ebedfc2bb748b199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1536317860890886761
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8256685427946168624}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.047968738, y: 0.15195961, z: 0.368296}
+  m_Center: {x: 0.00020011513, y: -0.06261834, z: -0.018284788}
+--- !u!114 &7452666401425914242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8256685427946168624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d354a651b714c4ea5c22f5412663c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Revolver
+  weaponData: {fileID: 11400000, guid: 7066bd94c1afdcf448efa858b896e748, type: 2}
+  itemData: {fileID: 0}

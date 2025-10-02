@@ -8,14 +8,18 @@ public class Health : MonoBehaviour
     public float currentHealth = 100f;
     public float maxHealth = 100f;
     private Renderer rend;
+    private static readonly int DeathHash = Animator.StringToHash("Death");
 
     void Start()
     {
+        if (tag != "Player")
+            playerID = -1;
+
         rend = GetComponent<Renderer>();
         if (rend == null)
             Debug.LogWarning("No Renderer component found on " + gameObject.name);
 
-        UpdateUI();
+        //UpdateUI();
     }
 
     public void TakeDamage(float amount)
@@ -24,10 +28,32 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Max(currentHealth, 0);
 
         if (currentHealth <= 0f)
+        {
+            if (tag != "Player") //if tag isn't player, stop it from moving
+            {
+                if (GetComponent<AttackAI>() != null) //remove component
+                    Destroy(GetComponent<AttackAI>());
+
+            }
+            if (tag == "Player")
+            {
+                if (GetComponent<PlayerBehaviour>().playerInput != null)
+                    GetComponent<PlayerBehaviour>().playerInput.enabled = false;
+                // Find the CinemachineVirtualCamera in the scene
+                CinemachineCamera vcam = FindObjectOfType<CinemachineCamera>();
+                if (vcam != null)
+                {
+                    vcam.enabled = false;
+                }
+            }
             Die();
-        else
+        }
+            
+                
+        
+        /*else
             UpdateColor();
-         UpdateUI();
+         UpdateUI();*/
     }
 
     public void Heal(float amount)
@@ -42,12 +68,14 @@ public class Health : MonoBehaviour
     public void Die()
     {
         if (GetComponent<Animator>() != null)
-            GetComponent<Animator>().SetTrigger("DeathHash");
-
-        // disable input & movement (you can replace this with ragdoll activation)
-        if (GetComponent<PlayerBehaviour>().playerInput != null)
-            GetComponent<PlayerBehaviour>().playerInput.enabled = false;
-        Destroy(gameObject, 5f);
+            GetComponent<Animator>().SetTrigger(DeathHash);
+        if (tag == "Player")
+        {
+            if (GetComponent<PlayerBehaviour>().playerInput != null)
+                GetComponent<PlayerBehaviour>().playerInput.enabled = false;
+        }
+        Debug.Log(gameObject.name + " has died.");
+        Destroy(gameObject, 3f);
     }
 
     void UpdateColor()

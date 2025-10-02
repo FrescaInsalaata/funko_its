@@ -31,17 +31,17 @@ public class GameManager : MonoBehaviour
         {
             areas[i].BuildArea();
         }
-        areas[0].ActivateArea(); // Activate first area
+        areas[0].ActivateArea();
         EnemySpawnerManager.Instance.SetEnemiesToSpawn(areas[0].numEnemies);
     }
 
-    public IEnumerator CompletedArea()
+    public void CompletedArea()
     {
         if (currentArea + 1 < areas.Length) // check BEFORE increment
         {
             currentArea++;
+            Debug.Log("Opening area " + areas[currentArea].areaName);
             areas[currentArea].ActivateArea();
-            yield return new WaitForSeconds(4);
             EnemySpawnerManager.Instance.SetEnemiesToSpawn(areas[currentArea].numEnemies);
         }
         else

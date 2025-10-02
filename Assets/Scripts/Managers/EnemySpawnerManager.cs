@@ -26,7 +26,6 @@ public class EnemySpawnerManager : MonoBehaviour
 
     [Header("Spawn Settings")]
     public float spawnInterval = 3f;  // Time between spawns
-    public const float MAX_FACEBREAKERS = 2f; // Max number of Facebreakers allowed in the scene
 
     private float timer = 0f; // Timer to track spawn intervals
     private float enemiesToSpawn = 0; // Enemies left to spawn in the current area
@@ -54,7 +53,8 @@ public class EnemySpawnerManager : MonoBehaviour
         }
         if (enemiesToSpawn <= 0 && !IsAnyEnemyAlive())
         {
-            StartCoroutine(GameManager.Instance.CompletedArea());
+            GameManager.Instance.CompletedArea();
+          
         }
     }
     void SpawnEnemy()
@@ -71,23 +71,8 @@ public class EnemySpawnerManager : MonoBehaviour
         for (int i = 0; i < 5; i++) // try a few times max
         {
             GameObject candidate = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-
-            if (candidate.name.ToLower().Contains("facebreaker"))
-            {
-                if (currentFacebreakers >= MAX_FACEBREAKERS)
-                    continue; // try another prefab
-                else
-                {
-                    currentFacebreakers++;
-                    enemyToSpawn = candidate;
-                    break;
-                }
-            }
-            else
-            {
-                enemyToSpawn = candidate;
-                break;
-            }
+            enemyToSpawn = candidate;
+            break;
         }
 
         if (enemyToSpawn == null)

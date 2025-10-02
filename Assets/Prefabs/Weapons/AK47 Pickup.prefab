@@ -1,0 +1,161 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4223517305469247081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8064515791043000322}
+  - component: {fileID: 4571275498535872905}
+  m_Layer: 0
+  m_Name: AK47 Pickup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8064515791043000322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223517305469247081}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 26.057604, y: 3.48999, z: 17.081}
+  m_LocalScale: {x: 1.0495, y: 1.0495, z: 1.0495}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 129940813670347056}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4571275498535872905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223517305469247081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a1de79f1a6ea4ebedfc2bb748b199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &8193481771445169644
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8064515791043000322}
+    m_Modifications:
+    - target: {fileID: 8104434486009519324, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104434486009519324, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104434486009519324, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.832
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104434486009519324, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104434486009519324, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104434486009519324, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104434486009519324, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104434486009519324, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104434486009519324, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104434486009519324, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8877558679003825766, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+      propertyPath: m_Name
+      value: AK47 Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 8877558679003825766, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+      propertyPath: m_TagString
+      value: Pickup
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7048897136323735525, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8877558679003825766, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1871630098762474663}
+    - targetCorrespondingSourceObject: {fileID: 8877558679003825766, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6289123489603414191}
+  m_SourcePrefab: {fileID: 100100000, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+--- !u!4 &129940813670347056 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8104434486009519324, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+  m_PrefabInstance: {fileID: 8193481771445169644}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &758422057549900682 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8877558679003825766, guid: 800c73a119cc61e48956c67d41415d4f, type: 3}
+  m_PrefabInstance: {fileID: 8193481771445169644}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1871630098762474663
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758422057549900682}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.037249442, y: 0.40298942, z: 0.13321847}
+  m_Center: {x: 0, y: -0.124089964, z: -0.027011069}
+--- !u!114 &6289123489603414191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758422057549900682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d354a651b714c4ea5c22f5412663c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: AK47
+  weaponData: {fileID: 11400000, guid: 10f08057a3f891647b9cb4a61f1ae0b0, type: 2}
+  itemData: {fileID: 0}

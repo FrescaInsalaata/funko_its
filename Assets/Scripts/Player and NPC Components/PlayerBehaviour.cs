@@ -1,6 +1,7 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerBehaviour : MonoBehaviour
@@ -10,6 +11,11 @@ public class PlayerBehaviour : MonoBehaviour
     public float moveSpeedMultiplier = 2f;
     private float moveSpeed;
     private bool isRunning;
+
+    [Header("PickupWeaponDatas")]
+    public WeaponData coltPistolWeaponData;
+    public WeaponData ak47RifleWeaponData;
+    public WeaponData revolverWeaponData;
 
     [Header("Animation")]
     private Animator animator;
@@ -54,6 +60,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Awake()
     {
+        if (mainCamera == null)
+            mainCamera = Camera.main;
         rb = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
@@ -107,8 +115,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Start()
     {
-        if (currentWeapon != null)
-            EquipWeapon(currentWeapon);
+        EquipWeapon(currentWeapon);
     }
 
     private void Update()
@@ -133,49 +140,39 @@ public class PlayerBehaviour : MonoBehaviour
             direction.Normalize();
         } else if (direction.magnitude < 0.1f)
         {
-            Debug.Log("Not moving");
             animator.SetBool(IsMovingHash, false);
             return;
         }
         rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
-        Debug.Log("Moving");
         animator.SetBool(IsMovingHash, true);
     }
 
     private void Look()
     {
-        // Default to zero
-        lookDir = Vector3.zero;
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
-        // Ray to floor plane
-        Plane groundPlane = new Plane(Vector3.up, transform.position);
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (groundPlane.Raycast(ray, out float distance))
+        if (Physics.Raycast(ray, out hit, 100f, groundMask))
         {
-            Vector3 hitPoint = ray.GetPoint(distance);
-            lookDir = (hitPoint - transform.position);
-            lookDir.y = 0f;
-            lookDir.Normalize();
-        }
-        else if (lookInput.sqrMagnitude > 0.01f)
-        {
-            lookDir = new Vector3(lookInput.x, 0f, lookInput.y).normalized;
-        }
+            Vector3 targetPosition = hit.point;
+            // direzione dal player al punto
+            Vector3 direction = targetPosition - transform.position;
+            direction.y = 0; // opzionale: ignora l’asse Y per non inclinare il personaggio
 
-        if (lookDir.sqrMagnitude > 0.01f)
-        {
-            float rotationSpeed = 720f; // degrees per second
-            Quaternion targetRotation = Quaternion.LookRotation(lookDir);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            if (direction.magnitude > 0.1f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+            }
         }
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Pickup")
         {
             nearbyPickup = other.GetComponent<PickupBehaviour>();
+            Debug.Log("Pickup found: " + other.name);
             if (nearbyPickup.itemName.ToLower() == "healthpickup")
             {
                 Debug.Log("using health pickup...");
@@ -219,7 +216,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnUseItem(InputAction.CallbackContext ctx)
     {
-        if (currentItem != null && currentItem.uses >= 0 && throwMount != null)
+        if (currentItem != null && throwMount != null)
         {
             currentItem.UseItem(throwMount.transform);
         }
@@ -266,18 +263,22 @@ public class PlayerBehaviour : MonoBehaviour
             Destroy(weaponInstance);
 
         weaponInstance = Instantiate(currentWeapon.weaponPrefab, handMount.transform);
-        weaponInstance.transform.localScale = Vector3.one;
+        weaponInstance.transform.localScale = currentWeapon.weaponPrefab.transform.localScale;
 
         myWeaponInstance = new WeaponInstance(currentWeapon);
 
         // Aggiorna la UI
-        UIManager.Instance.updateAmmo(playerID, Mathf.RoundToInt(myWeaponInstance.currentAmmo));
+        //UIManager.Instance.updateAmmo(playerID, Mathf.RoundToInt(myWeaponInstance.currentAmmo));
+        Debug.Log("Equipped weapon: " + currentWeapon.weaponName + "Current Ammo: " + myWeaponInstance.currentAmmo);
 
         // Trova il firePoint nella nuova arma
         firePoint = weaponInstance.transform.Find("FirePoint")?.gameObject;
         if (firePoint == null)
         {
             Debug.LogError("FirePoint non trovato nell'arma: " + weaponInstance.name);
+        } else
+        {
+            Debug.Log("FirePoint trovato: " + firePoint.name);
         }
     }
 

@@ -14,6 +14,7 @@ public class WeaponData : ScriptableObject
     public float range;
     public float maxAmmo;
     public float reloadTime;
+    public bool isReloading = false;
     public WeaponType weaponType;
     public BulletType bulletType;
 
@@ -30,7 +31,8 @@ public class WeaponData : ScriptableObject
 
     public virtual void Fire(GameObject firePoint, int playerID)
     {
-        if (projectilePrefab == null || firePoint == null || currentAmmo <= 0) return;
+
+        if (projectilePrefab == null || firePoint == null || currentAmmo <= 0 || isReloading) return; //add that i can't fire if it's doing the reload coroutine
 
         currentAmmo--;
 
@@ -75,8 +77,10 @@ public class WeaponData : ScriptableObject
 
     private IEnumerator ReloadRoutine(int playerID)
     {
+        isReloading = !isReloading;
         yield return new WaitForSeconds(reloadTime);
         currentAmmo = maxAmmo;
+        isReloading = !isReloading;
 
         if (playerID >= 0 && UIManager.Instance != null)
             UIManager.Instance.updateAmmo(playerID, Mathf.RoundToInt(currentAmmo));
