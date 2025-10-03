@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
         if (rend == null)
             Debug.LogWarning("No Renderer component found on " + gameObject.name);
 
-        //UpdateUI();
+        UpdateUI();
     }
 
     public void TakeDamage(float amount)
@@ -48,12 +48,9 @@ public class Health : MonoBehaviour
             }
             Die();
         }
-            
-                
-        
-        /*else
-            UpdateColor();
-         UpdateUI();*/
+
+        UpdateColor();
+        UpdateUI();
     }
 
     public void Heal(float amount)

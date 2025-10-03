@@ -23,7 +23,6 @@ public class PlayerManager : MonoBehaviour
                 if (health != null)
                     health.playerID = playerCount;
 
-                // Attiva UI SOLO se UIManager è già pronto
                 if (UIManager.Instance != null)
                     UIManager.Instance.playerUIs[playerCount].gameObject.SetActive(true);
 

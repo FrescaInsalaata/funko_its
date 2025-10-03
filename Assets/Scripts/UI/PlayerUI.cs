@@ -11,11 +11,11 @@ public class PlayerUI : MonoBehaviour
     public void setAmmo(int value)
     {
         ammo = value;
-        ammoText.text = "Ammo: " + ammo;
+        ammoText.text = ammo.ToString();
     }
 
     public void setHealth(int value)
     {
-        healthText.text = "Health: " + value;
+        healthText.text = value.ToString();
     }
 }

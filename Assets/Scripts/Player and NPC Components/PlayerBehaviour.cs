@@ -216,6 +216,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnInteract(InputAction.CallbackContext ctx)
     {
+        if (PauseMenu.GameIsPaused) return; // Blocca interazione in pausa
+
         if (nearbyPickup != null)
         {
             if (nearbyPickup.weaponData != null)
@@ -236,6 +238,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnUseItem(InputAction.CallbackContext ctx)
     {
+        if (PauseMenu.GameIsPaused) return; // Blocca uso item in pausa
+
         if (currentItem != null && throwMount != null)
         {
             currentItem.UseItem(throwMount.transform);
@@ -248,6 +252,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnFire(InputAction.CallbackContext ctx)
     {
+        if (PauseMenu.GameIsPaused) return; // Blocca lo sparo in pausa
+
         if (myWeaponInstance != null)
         {
             myWeaponInstance.Fire(firePoint, playerID);
@@ -260,6 +266,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnReload(InputAction.CallbackContext ctx)
     {
+        if (PauseMenu.GameIsPaused) return; // Blocca reload in pausa
+
         if (myWeaponInstance != null)
         {
             myWeaponInstance.Reload(this, playerID);
@@ -288,7 +296,7 @@ public class PlayerBehaviour : MonoBehaviour
         myWeaponInstance = new WeaponInstance(currentWeapon);
 
         // Aggiorna la UI
-        //UIManager.Instance.updateAmmo(playerID, Mathf.RoundToInt(myWeaponInstance.currentAmmo));
+        UIManager.Instance.updateAmmo(playerID, Mathf.RoundToInt(myWeaponInstance.currentAmmo));
         Debug.Log("Equipped weapon: " + currentWeapon.weaponName + "Current Ammo: " + myWeaponInstance.currentAmmo);
 
         // Trova il firePoint nella nuova arma
