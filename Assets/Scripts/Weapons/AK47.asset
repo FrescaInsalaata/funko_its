@@ -10,17 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 252b76bd895a27240ae710c3112215b3, type: 3}
-  m_Name: ColtPistol
+  m_Name: AK47
   m_EditorClassIdentifier: 
-  weaponName: ColtPistol
-  damage: 25
-  fireRate: 6
-  range: 0
-  maxAmmo: 12
-  reloadTime: 3
+  weaponName: AK47
+  damage: 20
+  fireRate: 2
+  range: 15
+  maxAmmo: 30
+  reloadTime: 2
   isReloading: 0
   weaponType: 1
   bulletType: 1
+  fireSounds:
+  - {fileID: 8300000, guid: e2a0ebc114bffd24db0eca279887abca, type: 3}
+  reloadSound: {fileID: 8300000, guid: fa9e3ed336ee2534a9aaf46d0f403bc2, type: 3}
   projectilePrefab: {fileID: 5629096558020621899, guid: c8f91e6251b04c047afbaba8f0380511, type: 3}
-  weaponPrefab: {fileID: 1090167109481366465, guid: 431584647c8db1d468d515f60ea14196, type: 3}
-  projectileSpeed: 35
+  weaponPrefab: {fileID: 5776814840974637702, guid: 1f9c0deb2694be448ae98ef243cb22ff, type: 3}
+  projectileSpeed: 45

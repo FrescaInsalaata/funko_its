@@ -71,6 +71,8 @@ public class EnemySpawnerManager : MonoBehaviour
         for (int i = 0; i < 5; i++) // try a few times max
         {
             GameObject candidate = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+            if (candidate.name == "BossEnemyFBX" && currentArea < 2)
+                continue;
             enemyToSpawn = candidate;
             break;
         }
@@ -104,9 +106,13 @@ public class EnemySpawnerManager : MonoBehaviour
 
         Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
     }
-    public void SetEnemiesToSpawn(float enemies) // Called by GameManager when area starts
+    public void SetEnemiesToSpawn(float enemies, float numPlayers) // Called by GameManager when area starts
     {
-        enemiesToSpawn = enemies;
+        if (enemies <= 0 || numPlayers <= 0)
+        {
+            numPlayers = 1;
+        }
+        enemiesToSpawn = enemies * numPlayers;
     }
     public void ReduceFacebreakerCounter() // Called by Facebreaker on death
     {

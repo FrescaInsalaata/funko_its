@@ -193,6 +193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2f5d13197ea144698e62259fcd7185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthSound: {fileID: 8300000, guid: f629673218c5f5542a8fa7de96bfe2a1, type: 3}
+  vibeCheckSound: {fileID: 8300000, guid: 3862cd1712c678449b7d97945fb3d53e, type: 3}
+  pickupSound: {fileID: 8300000, guid: dc03d6e3081bd83478829551454d4327, type: 3}
+  footstepSound: {fileID: 8300000, guid: 909304a3a0801da4c981738fe31fbf7e, type: 3}
   playerColors:
   - {r: 0.29369166, g: 0.5569572, b: 0.93207544, a: 0}
   - {r: 0.94716984, g: 0.27700236, b: 0.48946297, a: 0}

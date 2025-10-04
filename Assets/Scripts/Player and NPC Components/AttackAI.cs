@@ -43,11 +43,20 @@ public class AttackAI : MonoBehaviour
 
     void Update()
     {
+        // If there is no valid target, do nothing
+        if (enemyCore.targetPlayer == null)
+        {
+            enemyCore.agent.isStopped = true;
+            animator.SetBool("IsAttacking", false);
+            return;
+        }
+
         sqrDistance = (enemyCore.targetPlayer.position - transform.position).sqrMagnitude;
+
         switch (weapon.weaponType)
         {
             case WeaponType.Melee:
-                HandleMeleeAttack(sqrDistance); 
+                HandleMeleeAttack(sqrDistance);
                 break;
             case WeaponType.Ranged:
                 HandleRangedAttack(sqrDistance);

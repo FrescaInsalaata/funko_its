@@ -37,7 +37,6 @@ public class PickupSpawnerManager : MonoBehaviour
                     Debug.LogWarning("No weapon prefabs assigned in PickupSpawnerManager!");
                     continue;
                 }
-                Debug.Log("Spawning weapon at: " + spawnPoint.name);
                 int weaponIndex = Random.Range(0, weaponGroundPrefabs.Length);
                 Instantiate(weaponGroundPrefabs[weaponIndex], spawnPoint.transform.position, Quaternion.identity);
                 continue;
@@ -49,7 +48,6 @@ public class PickupSpawnerManager : MonoBehaviour
                     Debug.LogWarning("No weapon prefabs assigned in PickupSpawnerManager!");
                     continue;
                 }
-                Debug.Log("Spawning pickup at: " + spawnPoint.name);
                 int pickupIndex = Random.Range(0, pickupGroundPrefabs.Length);
                 Instantiate(pickupGroundPrefabs[pickupIndex], spawnPoint.transform.position, Quaternion.identity);
                 continue;

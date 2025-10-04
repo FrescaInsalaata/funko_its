@@ -15,11 +15,5 @@ MonoBehaviour:
   itemName: VibeCheck
   itemType: 1
   itemPrefab: {fileID: 4954789730651437622, guid: 00db4194be14063449ae8b9d49794b93, type: 3}
-  uses: 0
-  throwForce: 0
-  healAmount: 0
-  healRate: 0
-  duration: 0
-  delay: 0
-  delayTime: 0
-  durationTime: 0
+  duration: 7
+  multSpeedBoost: 2

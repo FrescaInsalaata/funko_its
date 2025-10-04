@@ -8,6 +8,12 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerBehaviour : MonoBehaviour
 {
+    [Header("Sounds")]
+    public AudioClip healthSound;
+    public AudioClip vibeCheckSound;
+    public AudioClip pickupSound;
+    public AudioClip footstepSound;
+
     [Header("Camera")]
     private CinemachineTargetGroup targetGroup;
 
@@ -43,6 +49,7 @@ public class PlayerBehaviour : MonoBehaviour
     [Header("Item")]
     public ItemData currentItem;
     public GameObject throwMount;
+    private bool isVibeCheckActive;
 
     [Header("Camera")]
     public Camera mainCamera;
@@ -63,6 +70,7 @@ public class PlayerBehaviour : MonoBehaviour
     Vector3 lookDir;
     private Vector3 lastLookDirection;
     private PickupBehaviour nearbyPickup;
+
 
     public int playerID;
     int index;
@@ -126,6 +134,16 @@ public class PlayerBehaviour : MonoBehaviour
     {
         EquipWeapon(currentWeapon);
         ApplyPlayerColor();
+        //find PlayerManager gameobject and call SpawnPlayerUI
+        PlayerManager pm = FindAnyObjectByType<PlayerManager>();
+        if (pm != null)
+        {
+            pm.SpawnPlayerUI(this.gameObject);
+        }
+        else
+        {
+            Debug.LogError("No PlayerManager found in the scene. Please add one.");
+        }
         if (targetGroup == null)
         {
             targetGroup = FindFirstObjectByType<CinemachineTargetGroup>();
@@ -176,6 +194,11 @@ public class PlayerBehaviour : MonoBehaviour
         }
         rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
         animator.SetBool(IsMovingHash, true);
+        /*if (!GetComponent<AudioSource>().isPlaying)
+        {
+            GetComponent<AudioSource>().clip = footstepSound;
+            GetComponent<AudioSource>().Play();
+        }*/
     }
 
     private void Look()
@@ -225,7 +248,13 @@ public class PlayerBehaviour : MonoBehaviour
             Debug.Log("Pickup found: " + other.name);
             if (nearbyPickup.itemName.ToLower() == "healthpickup")
             {
-                Debug.Log("using health pickup...");
+                AudioSource audioSource = GetComponent<AudioSource>();
+                if (audioSource == null)
+                {
+                    audioSource = gameObject.AddComponent<AudioSource>();
+                }
+                audioSource.clip = healthSound;
+                audioSource.Play();
                 Health playerHealth = GetComponent<Health>();
                 if (playerHealth != null)
                 {
@@ -255,12 +284,26 @@ public class PlayerBehaviour : MonoBehaviour
                 Debug.Log("Picking up weapon: " + nearbyPickup.weaponData.weaponName);
                 EquipWeapon(nearbyPickup.weaponData);
                 Destroy(nearbyPickup.gameObject);
+                AudioSource audioSource = GetComponent<AudioSource>();
+                if (audioSource == null)
+                {
+                    audioSource = gameObject.AddComponent<AudioSource>();
+                }
+                audioSource.clip = pickupSound;
+                audioSource.Play();
             }
             else if (nearbyPickup.itemData != null)
             {
                 Debug.Log("Picking up item: " + nearbyPickup.itemData.itemName);
                 EquipItem(nearbyPickup.itemData);
                 Destroy(nearbyPickup.gameObject);
+                AudioSource audioSource = GetComponent<AudioSource>();
+                if (audioSource == null)
+                {
+                    audioSource = gameObject.AddComponent<AudioSource>();
+                }
+                audioSource.clip = pickupSound;
+                audioSource.Play();
             }
             return;
         }
@@ -270,13 +313,13 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (PauseMenu.GameIsPaused) return; // Blocca uso item in pausa
 
-        if (currentItem != null && throwMount != null)
+        if (currentItem != null)
         {
-            currentItem.UseItem(throwMount.transform);
+            ApplyVibeCheck(currentItem.multSpeedBoost, currentItem.duration);
         }
         else
         {
-            Debug.LogWarning("Tried to use item, but no item or throw mount assigned!");
+            Debug.LogWarning("Tried to use item, but no item assigned!");
         }
     }
 
@@ -286,7 +329,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (myWeaponInstance != null)
         {
-            myWeaponInstance.Fire(firePoint, playerID, playerColors[index]);
+            myWeaponInstance.Fire(firePoint, playerID, playerColors[index], isVibeCheckActive);
             if (animator != null)
             {
                 animator.SetTrigger(FireHash);
@@ -348,9 +391,17 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void ApplyVibeCheck(float multSpeedBoost, float duration)
     {
-        // Apply the speed boost
-        moveSpeed *= multSpeedBoost;
 
+        moveSpeed *= multSpeedBoost;
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.clip = vibeCheckSound;
+        audioSource.Play();
+        Debug.Log("VibeCheck applied! New moveSpeed: " + moveSpeed);
+        isVibeCheckActive = true;
         // Start a coroutine to reset the speed after the duration
         StartCoroutine(ResetSpeedAfterDelay(duration, multSpeedBoost));
     }
@@ -359,5 +410,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         moveSpeed /= multSpeedBoost;
+        isVibeCheckActive = false;
+        Debug.Log("VibeCheck ended. MoveSpeed reset to: " + moveSpeed);
     }
 }

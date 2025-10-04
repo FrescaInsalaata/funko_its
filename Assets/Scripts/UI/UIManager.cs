@@ -3,7 +3,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    public PlayerUI[] playerUIs; // array di 4 pannelli UI
+    public PlayerUI[] playerUIs;
 
     private void Awake()
     {

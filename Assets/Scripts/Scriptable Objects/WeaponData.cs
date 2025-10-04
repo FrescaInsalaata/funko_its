@@ -17,6 +17,8 @@ public class WeaponData : ScriptableObject
     public bool isReloading = false;
     public WeaponType weaponType;
     public BulletType bulletType;
+    public AudioClip[] fireSounds;
+    public AudioClip reloadSound;
 
     [Header("Gun")]
     public GameObject projectilePrefab;
@@ -31,8 +33,19 @@ public class WeaponData : ScriptableObject
 
     public virtual void Fire(GameObject firePoint, int playerID)
     {
+        if (projectilePrefab == null || firePoint == null || currentAmmo <= 0 || isReloading) return;
 
-        if (projectilePrefab == null || firePoint == null || currentAmmo <= 0 || isReloading) return; //add that i can't fire if it's doing the reload coroutine
+        Debug.Log("FirePoint is: " + firePoint.name);
+        AudioSource audioSource = firePoint.GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.LogWarning("No AudioSource found on " + firePoint.name);
+        }
+        else
+        {
+            Debug.Log("Playing fire sound");
+            audioSource.Play();
+        }
 
         currentAmmo--;
 
@@ -59,21 +72,16 @@ public class WeaponData : ScriptableObject
             UIManager.Instance.updateAmmo(playerID, Mathf.RoundToInt(currentAmmo));
     }
 
-    public virtual void Reload(MonoBehaviour owner, int playerID)
-    {
-        if (reloadTime <= 0 || currentAmmo >= maxAmmo || maxAmmo <= 0) return;
-        owner.StartCoroutine(ReloadRoutine(playerID));
-    }
-
     public virtual void MeleeAttack(Transform attackPoint, GameObject player)
     {
 
         player.GetComponent<Health>().TakeDamage(damage);
     }
-
-    // ------------------
-    // PRIVATE METHODS
-    // ------------------
+    public virtual void Reload(MonoBehaviour owner, int playerID)
+    {
+        if (reloadTime <= 0 || currentAmmo >= maxAmmo || maxAmmo <= 0 || isReloading) return;
+        owner.StartCoroutine(ReloadRoutine(playerID));
+    }
 
     private IEnumerator ReloadRoutine(int playerID)
     {

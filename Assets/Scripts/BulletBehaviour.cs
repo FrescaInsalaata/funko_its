@@ -20,15 +20,12 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log(collision.gameObject.name + " now has health.");
             var enemyHealth = collision.gameObject.GetComponent<Health>();
             if (enemyHealth == null)
             {
-                Debug.LogWarning(collision.gameObject.name + " has no Health component!");
                 return;
             }
             enemyHealth.TakeDamage(bulletDamage);
-            Debug.Log("FUNZIONA!");
         }
         Destroy(gameObject);
     }

@@ -12,13 +12,11 @@ public class ItemData : ScriptableObject
     [Header("Item Stats")]
     public float duration;
     public float multSpeedBoost = 2f; 
-    public virtual void UseItem(Transform throwPoint)
+    public virtual void UseItem(GameObject user)
     {
         if (itemType == ItemType.Consumable)
         {
-            // Assuming the player GameObject has a tag "Player"
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            UseConsumable(player);
+            UseConsumable(user);
         }
     }
     public virtual void UseConsumable(GameObject player)

@@ -21,6 +21,9 @@ MonoBehaviour:
   isReloading: 0
   weaponType: 1
   bulletType: 1
+  fireSounds:
+  - {fileID: 8300000, guid: 2d712f1200212ce47b606c2bcd001ca2, type: 3}
+  reloadSound: {fileID: 8300000, guid: 42d41c629e450074998c9e4ca925aa86, type: 3}
   projectilePrefab: {fileID: 5629096558020621899, guid: c8f91e6251b04c047afbaba8f0380511, type: 3}
   weaponPrefab: {fileID: 6140169845999458792, guid: d22ba96df5acb884f969e19e35cd3738, type: 3}
   projectileSpeed: 55

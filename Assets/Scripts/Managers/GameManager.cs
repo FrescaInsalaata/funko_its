@@ -32,7 +32,9 @@ public class GameManager : MonoBehaviour
             areas[i].BuildArea();
         }
         areas[0].ActivateArea();
-        EnemySpawnerManager.Instance.SetEnemiesToSpawn(areas[0].numEnemies);
+        //get number of players from PlayerManager
+        int numPlayers = FindAnyObjectByType<PlayerManager>().playerCount;
+        EnemySpawnerManager.Instance.SetEnemiesToSpawn(areas[0].numEnemies, numPlayers);
     }
 
     public void CompletedArea()
@@ -42,12 +44,12 @@ public class GameManager : MonoBehaviour
             currentArea++;
             Debug.Log("Opening area " + areas[currentArea].areaName);
             areas[currentArea].ActivateArea();
-            EnemySpawnerManager.Instance.SetEnemiesToSpawn(areas[currentArea].numEnemies);
+            int numPlayers = FindAnyObjectByType<PlayerManager>().playerCount;
+            EnemySpawnerManager.Instance.SetEnemiesToSpawn(areas[currentArea].numEnemies, numPlayers);
         }
         else
         {
-            Debug.Log("All areas completed!");
-            Destroy(EnemySpawnerManager.Instance.gameObject);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("WinScene");
         }
     }
     public int GetCurrentArea()

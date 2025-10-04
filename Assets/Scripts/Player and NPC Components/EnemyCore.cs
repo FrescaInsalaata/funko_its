@@ -16,6 +16,14 @@ public class EnemyCore : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
+        if (gameObject.name == "BossEnemyFBX")
+        {
+            Renderer rend = GetComponentInChildren<Renderer>();
+            if (rend != null)
+            {
+                rend.material.color = Color.red;
+            }
+        }
     }
 
     void Update()

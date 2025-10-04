@@ -15,10 +15,6 @@ public class Health : MonoBehaviour
         if (tag != "Player")
             playerID = -1;
 
-        rend = GetComponent<Renderer>();
-        if (rend == null)
-            Debug.LogWarning("No Renderer component found on " + gameObject.name);
-
         UpdateUI();
     }
 
@@ -48,8 +44,6 @@ public class Health : MonoBehaviour
             }
             Die();
         }
-
-        UpdateColor();
         UpdateUI();
     }
 
@@ -57,8 +51,6 @@ public class Health : MonoBehaviour
     {
         currentHealth += amount;
         if (currentHealth > maxHealth) currentHealth = maxHealth;
-
-        UpdateColor();
         UpdateUI();
     }
 
@@ -71,16 +63,17 @@ public class Health : MonoBehaviour
             if (GetComponent<PlayerBehaviour>().playerInput != null)
                 GetComponent<PlayerBehaviour>().playerInput.enabled = false;
         }
-        Debug.Log(gameObject.name + " has died.");
-        Destroy(gameObject, 3f);
+        //wait 3 seconds, then change to lose scene
+        StartCoroutine(WaitAndChangeScene(3f));
     }
 
-    void UpdateColor()
+    private System.Collections.IEnumerator WaitAndChangeScene(float waitTime)
     {
-        float t = Mathf.Clamp01(currentHealth / maxHealth); // 1 = full health, 0 = dead
-        Color newColor = Color.Lerp(Color.red, Color.green, t); // green at full, red at 0
-        if (rend != null)
-            rend.material.color = newColor;
+        yield return new WaitForSeconds(waitTime);
+        if (tag == "Player")
+            UnityEngine.SceneManagement.SceneManager.LoadScene("GameOverScene");
+        else
+            Destroy(gameObject);
     }
 
     void UpdateUI()
