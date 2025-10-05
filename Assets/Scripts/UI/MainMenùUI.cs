@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
-using UnityEditor; // per fermare il Play Mode in Editor
+using UnityEditor;
 #endif
 using System;
 
@@ -24,7 +24,8 @@ public class MainMenuUI : MonoBehaviour
     {
         Debug.Log("[MainMenuUI] QuitGame called");
 
+        #if UNITY_EDITOR
         EditorApplication.isPlaying = false; // ferma Play Mode in Editor
-
+        #endif
     }
 }
