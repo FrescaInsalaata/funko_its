@@ -70,7 +70,10 @@ public class PlayerBehaviour : MonoBehaviour
     Vector3 lookDir;
     private Vector3 lastLookDirection;
     private PickupBehaviour nearbyPickup;
-
+    private InputDevice device => playerInput.currentControlScheme == "Gamepad" ? (InputDevice)Gamepad.current : Keyboard.current;
+    public float angleCorrection = 30f; // tweak to match your camera
+    public float spawnRadius = 1f; // radius around closest player to spawn
+    public Transform defaultSpawnPoint; // assign your "PlayerSpawnPoint" here
 
     public int playerID;
     int index;
@@ -132,6 +135,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Start()
     {
+        SpawnNearFriend();
         EquipWeapon(currentWeapon);
         ApplyPlayerColor();
         //find PlayerManager gameobject and call SpawnPlayerUI
@@ -165,6 +169,9 @@ public class PlayerBehaviour : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
+    }
+    private void LateUpdate()
+    {
         Look();
     }
     private void ApplyPlayerColor()
@@ -177,7 +184,27 @@ public class PlayerBehaviour : MonoBehaviour
             rend.material.color = playerColors[index];
         }
     }
+    private void SpawnNearFriend()
+    {
+        Transform closestPlayer = FindClosestPlayer(playerInput.transform);
+        Vector3 spawnPosition;
 
+        if (closestPlayer != null)
+        {
+            // Spawn near the closest player
+            Vector2 randomCircle = UnityEngine.Random.insideUnitCircle.normalized * spawnRadius;
+            spawnPosition = closestPlayer.position + new Vector3(randomCircle.x, 0, randomCircle.y);
+
+            // Optional collision check
+            if (Physics.CheckSphere(spawnPosition, 0.5f))
+            {
+                spawnPosition += new Vector3(spawnRadius, 0, spawnRadius);
+            }
+
+            playerInput.transform.position = spawnPosition;
+            playerInput.transform.rotation = Quaternion.identity;
+        }       
+    }
     private void Movement()
     {
         rb.linearVelocity = Vector3.zero;
@@ -203,40 +230,33 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Look()
     {
-        float rotationSpeed = 10f; // Expose as a field if needed
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        // Controller look has priority if present
-        if (lookInput != Vector2.zero)
+        float rotationSpeed = 10f;
+        if (device is Gamepad && lookInput != Vector2.zero)
         {
             lookDir = new Vector3(lookInput.x, 0f, lookInput.y);
             lastLookDirection = lookDir;
             Quaternion targetRotation = Quaternion.LookRotation(lookDir);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
-        // Mouse look if moving
-        else if (moveInput != Vector2.zero)
+        else if (device is Keyboard || device is Mouse)
         {
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100f, groundMask))
             {
-                Vector3 targetPosition = hit.point;
-                Vector3 direction = targetPosition - transform.position;
+                Vector3 direction = hit.point - transform.position;
                 direction.y = 0;
+
+                // Apply small rotation around Y to compensate
+                direction = Quaternion.Euler(0, angleCorrection, 0) * direction;
 
                 if (direction.magnitude > 0.1f)
                 {
-                    lastLookDirection = direction; // Update here too
+                    lastLookDirection = direction;
                     Quaternion targetRotation = Quaternion.LookRotation(direction);
                     transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
                 }
             }
-        }
-        // Idle: keep last direction
-        else if (lastLookDirection != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(lastLookDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
     }
 
@@ -391,7 +411,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void ApplyVibeCheck(float multSpeedBoost, float duration)
     {
-
+        currentItem = null;
         moveSpeed *= multSpeedBoost;
         AudioSource audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
@@ -412,5 +432,25 @@ public class PlayerBehaviour : MonoBehaviour
         moveSpeed /= multSpeedBoost;
         isVibeCheckActive = false;
         Debug.Log("VibeCheck ended. MoveSpeed reset to: " + moveSpeed);
+    }
+
+    private Transform FindClosestPlayer(Transform target)
+    {
+        PlayerInput[] players = FindObjectsOfType<PlayerInput>();
+        Transform closest = null;
+        float minDistance = float.MaxValue;
+
+        foreach (PlayerInput player in players)
+        {
+            if (player.transform == target) continue; // skip the new player
+            float distance = Vector3.Distance(target.position, player.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closest = player.transform;
+            }
+        }
+
+        return closest;
     }
 }

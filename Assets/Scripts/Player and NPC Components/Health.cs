@@ -36,7 +36,7 @@ public class Health : MonoBehaviour
                 if (GetComponent<PlayerBehaviour>().playerInput != null)
                     GetComponent<PlayerBehaviour>().playerInput.enabled = false;
                 // Find the CinemachineVirtualCamera in the scene
-                CinemachineCamera vcam = FindObjectOfType<CinemachineCamera>();
+                CinemachineCamera vcam = FindAnyObjectByType<CinemachineCamera>();
                 if (vcam != null)
                 {
                     vcam.enabled = false;

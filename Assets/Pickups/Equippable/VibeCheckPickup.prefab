@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 675375052052872622}
   - component: {fileID: 8705006901061508928}
   - component: {fileID: 4315964948828356958}
-  - component: {fileID: 1052504321061721046}
   - component: {fileID: 1623043084647820178}
+  - component: {fileID: 6808179757921173409}
   m_Layer: 0
   m_Name: VibeCheckPickup
   m_TagString: Pickup
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8715136305341014588}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -6051614091451219970, guid: f1dce8cc988e90b44bd260ccd08437fd, type: 3}
 --- !u!23 &4315964948828356958
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+  - {fileID: 8574145794438123427, guid: f1dce8cc988e90b44bd260ccd08437fd, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,8 +88,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1052504321061721046
-SphereCollider:
+--- !u!114 &1623043084647820178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8715136305341014588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d354a651b714c4ea5c22f5412663c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: VibeCheckPickup
+  weaponData: {fileID: 0}
+  itemData: {fileID: 11400000, guid: a94653a6e916635419996a9ca3c4b2c8, type: 2}
+--- !u!65 &6808179757921173409
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -107,20 +122,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1623043084647820178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8715136305341014588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10d354a651b714c4ea5c22f5412663c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: VibeCheck
-  weaponData: {fileID: 0}
-  itemData: {fileID: 11400000, guid: a94653a6e916635419996a9ca3c4b2c8, type: 2}
+  m_Size: {x: 0.55999994, y: 0.55999994, z: 2.1295612}
+  m_Center: {x: 0, y: 0, z: 1.0647806}

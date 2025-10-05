@@ -13,7 +13,8 @@ public class EnemySpawnerManager : MonoBehaviour
     public static EnemySpawnerManager Instance;
 
     [Header("Enemy Prefabs")]
-    public GameObject[] enemyPrefabs;
+    public GameObject FacebreakerPrefab;
+    public GameObject BossPrefab;
     // TODO: Place empty GameObjects in the scene as spawn points
     [Header("Area0 Spawn Points")]
     public GameObject[] area0SpawnPoints;
@@ -29,7 +30,7 @@ public class EnemySpawnerManager : MonoBehaviour
 
     private float timer = 0f; // Timer to track spawn intervals
     private float enemiesToSpawn = 0; // Enemies left to spawn in the current area
-    private float currentFacebreakers = 0; // Current number of Facebreakers in the scene
+    private float bossesSpawned = 0;
 
     void Awake()
     {
@@ -65,17 +66,13 @@ public class EnemySpawnerManager : MonoBehaviour
         enemiesToSpawn--;
 
         int currentArea = GameManager.Instance.GetCurrentArea();
-        GameObject enemyToSpawn = null;
-
-        // Pick enemy until we find one valid to spawn
-        for (int i = 0; i < 5; i++) // try a few times max
+        GameObject candidate = FacebreakerPrefab; // default
+        if (currentArea == 3 && bossesSpawned < 2)
         {
-            GameObject candidate = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-            if (candidate.name == "BossEnemyFBX" && currentArea < 2)
-                continue;
-            enemyToSpawn = candidate;
-            break;
-        }
+            candidate = BossPrefab;
+            bossesSpawned++;
+        } else candidate = FacebreakerPrefab;
+        GameObject enemyToSpawn = candidate;
 
         if (enemyToSpawn == null)
         {
@@ -106,18 +103,13 @@ public class EnemySpawnerManager : MonoBehaviour
 
         Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
     }
-    public void SetEnemiesToSpawn(float enemies, float numPlayers) // Called by GameManager when area starts
+    public void SetEnemiesToSpawn(float enemies, float numPlayers)
     {
         if (enemies <= 0 || numPlayers <= 0)
         {
             numPlayers = 1;
         }
         enemiesToSpawn = enemies * numPlayers;
-    }
-    public void ReduceFacebreakerCounter() // Called by Facebreaker on death
-    {
-        if (currentFacebreakers > 0)
-            currentFacebreakers--;
     }
     private bool IsAnyEnemyAlive()
     {

@@ -14,17 +14,41 @@ public class EnemyCore : MonoBehaviour
 
     void Awake()
     {
+        // Set up NavMeshAgent
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
-        if (gameObject.name == "BossEnemyFBX")
+
+        Debug.Log("GameObject name: " + gameObject.name);
+
+        if (gameObject.name.Contains("BossEnemyFBX"))
         {
-            Renderer rend = GetComponentInChildren<Renderer>();
-            if (rend != null)
+            Renderer[] renderers = GetComponentsInChildren<Renderer>(true);
+            Debug.Log("Renderers found: " + renderers.Length);
+
+            foreach (Renderer r in renderers)
             {
-                rend.material.color = Color.red;
+                foreach (Material mat in r.materials)
+                {
+                    // Only change the HAIR material
+                    if (mat.name.Contains("Material.001"))
+                    {
+                        if (mat.HasProperty("_BaseColor"))
+                        {
+                            mat.SetColor("_BaseColor", Color.red);      // URP/Lit property
+                        }
+                        else if (mat.HasProperty("_Color"))
+                        {
+                            mat.color = Color.red;                      // Fallback for legacy shaders
+                        }
+
+                        Debug.Log($"Hair material changed: {mat.name}");
+                    }
+                }
             }
         }
     }
+
+
 
     void Update()
     {
