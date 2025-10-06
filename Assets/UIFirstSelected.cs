@@ -1,16 +1,23 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using System.Collections;
 
 public class UIFirstSelected : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public GameObject firstSelected;
+
+    void OnEnable()
     {
-        
+        StartCoroutine(SetSelected());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator SetSelected()
     {
-        
+        yield return null; // aspetta un frame
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstSelected);
+        }
     }
 }
