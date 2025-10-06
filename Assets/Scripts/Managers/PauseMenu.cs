@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -49,7 +50,6 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Quit!");
-        Application.Quit(); // Funziona nel build, non in editor
+        Debug.Log("[PauseMenu] QuitGame called");
     }
 }
