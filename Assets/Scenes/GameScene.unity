@@ -547,6 +547,10 @@ PrefabInstance:
       propertyPath: pauseMenuUI
       value: 
       objectReference: {fileID: 1572587675}
+    - target: {fileID: 8875455952296127072, guid: 1d2cab002cc12ed479992897e343190b, type: 3}
+      propertyPath: backgroundMusic
+      value: 
+      objectReference: {fileID: 1236973910}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7663,6 +7667,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5738126756212025712, guid: b115b30cce596f4469986e1726a21a70, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6037366075376364267, guid: b115b30cce596f4469986e1726a21a70, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -8349,6 +8357,11 @@ BoxCollider:
 --- !u!4 &1236973909 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7296325325586623583, guid: 747bbba56cab08b499a3ecd8f7c74826, type: 3}
+  m_PrefabInstance: {fileID: 2069570470844112464}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1236973910 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: -8077952962772877287, guid: 747bbba56cab08b499a3ecd8f7c74826, type: 3}
   m_PrefabInstance: {fileID: 2069570470844112464}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1259976717 stripped

@@ -7,6 +7,8 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public AudioSource backgroundMusic;
+
 
     void Awake()
     {
@@ -43,6 +45,9 @@ public class PauseMenu : MonoBehaviour
 
         Time.timeScale = 1f;  // Riavvia il tempo
         GameIsPaused = false;
+
+        if (backgroundMusic != null)
+            backgroundMusic.Play(); // Riprende la musica
     }
 
     void Pause()
@@ -52,7 +57,11 @@ public class PauseMenu : MonoBehaviour
 
         Time.timeScale = 0f;  // Ferma il tempo
         GameIsPaused = true;
+
+        if (backgroundMusic != null)
+            backgroundMusic.Pause(); // Mette in pausa la musica
     }
+
 
     public void LoadMenu()
     {
