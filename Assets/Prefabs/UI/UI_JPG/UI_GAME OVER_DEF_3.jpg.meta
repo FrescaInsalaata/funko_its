@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4238f76f204087e4cb2c2cfafdec4405
+guid: fe96aba19d4b9044aa3c1f42d497535b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_VITTORIA_DEFINITIVO_0
+      name: UI_GAME OVER_DEF_3_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d23de3402a7ec124e907990e40f17226
-      internalID: 962104377
+      spriteID: fa76d9bf3f654e846b71d23e57c12457
+      internalID: -1144615717
       vertices: []
       indices: 
       edges: []
@@ -122,7 +122,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: fd07a35bdf0bb9e418a405ea079fd376
+    spriteID: 4bbb2b29fbcf7a14da29f06f83149a00
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +132,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UI_VITTORIA_DEFINITIVO_0: 962104377
+      UI_GAME OVER_DEF_3_0: -1144615717
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
