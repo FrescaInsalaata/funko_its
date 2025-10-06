@@ -743,6 +743,7 @@ GameObject:
   m_Component:
   - component: {fileID: 221133495}
   - component: {fileID: 221133494}
+  - component: {fileID: 221133496}
   m_Layer: 0
   m_Name: UIWinScene
   m_TagString: Untagged
@@ -777,6 +778,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &221133496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221133493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20dca50e5aa6fe44aa8be1c8438d97db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelected: {fileID: 1420959347}
 --- !u!1 &1362479317
 GameObject:
   m_ObjectHideFlags: 0
