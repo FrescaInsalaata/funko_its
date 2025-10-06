@@ -51,5 +51,9 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("[PauseMenu] QuitGame called");
+
+        #if UNITY_EDITOR
+        EditorApplication.isPlaying = false; // ferma Play Mode in Editor
+        #endif
     }
 }
